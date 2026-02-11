@@ -6,15 +6,14 @@
    - Renders academic sources
    =========================== */
 
-// ---------- Simulator configuration (edit these freely) ----------
 const DISPLAY_CAP = 100; // purely for the progress bar UI
 
 const ACTIVITIES = [
   {
     id: "guided_prompts",
     title: "Guided conversation prompts",
-    desc: "Short prompts designed for 10–15 minute calls.",
-    credits: 10
+    desc: "Short prompts designed for phone/video calls.",
+    credits: 15
   },
   {
     id: "coparenting",
@@ -26,37 +25,37 @@ const ACTIVITIES = [
     id: "shared_journal",
     title: "Shared journaling",
     desc: "Asynchronous entries to build continuity between contacts.",
-    credits: 12
+    credits: 20
   },
   {
-    id: "goal_setting",
-    title: "Family goal-setting",
-    desc: "Agree on a weekly goal and a concrete plan (small + realistic).",
+    id: "fun_activity",
+    title: "Family Activity",
+    desc: "Play a game together! .",
     credits: 10
   },
   {
     id: "check_in",
     title: "Structured check-in",
     desc: "Repair-focused: what went well, what was hard, one request for next time.",
-    credits: 8
+    credits: 15
   },
   {
     id: "reflection",
     title: "Reflection module",
-    desc: "Watch a short clip and answer reflection questions (practice + repetition).",
-    credits: 10
+    desc: "Watch a short clip on  parenting/lifestyle practices and answer reflection questions.",
+    credits: 15
   }
 ];
 
 const UNLOCKS = [
-  { threshold: 15, label: "Additional call minutes (small increase)" },
+  { threshold: 15, label: "Exponential increase in additional call minutes" },
   { threshold: 30, label: "Expanded messaging access" },
   { threshold: 45, label: "Video visitation slot" },
-  { threshold: 60, label: "Visit scheduling flexibility / priority" },
-  { threshold: 85, label: "Bonus family activity pack (age-specific prompts)" }
+  { threshold: 60, label: "Visit scheduling flexibility" },
+  { threshold: 85, label: "Adds to IIC 'Good-Time'" }
 ];
 
-// ---------- Academic sources (edit / add as you like) ----------
+// ---------- Academic sources ----------
 const SOURCES = [
   {
     title:
@@ -64,21 +63,19 @@ const SOURCES = [
     authors: "Bales, W. D.; Mears, D. P.",
     year: 2008,
     type: "Journal article",
-    themes: ["Visitation & recidivism", "Reentry"],
     link: "https://journals.sagepub.com/doi/10.1177/0022427808317574",
     notes:
-      "Large administrative study linking visitation to reduced and delayed recidivism; useful for motivating family connection as a public safety asset."
+      "Large administrative study linking visitation to reduced and delayed recidivism - motivates family connection as a public safety asset."
   },
   {
     title: "Prison Visitation and Recidivism",
     authors: "Mears, D. P.; Cochran, J.; Siennick, S.; Bales, W. D.",
     year: 2012,
     type: "Journal article",
-    themes: ["Visitation & recidivism", "Mechanisms"],
     link:
       "https://ojp.gov/ncjrs/virtual-library/abstracts/prison-visitation-and-recidivism",
     notes:
-      "Uses matching approaches and explores visitation dose/type; helpful for thinking about thresholds (credits → access)."
+      "Uses matching approaches and explores visitation dose/type, helpful for thinking about thresholds for gaining more credits based on activities completed."
   },
   {
     title:
@@ -86,7 +83,6 @@ const SOURCES = [
     authors: "Folk, J. B.; et al.",
     year: 2019,
     type: "Review / synthesis",
-    themes: ["Visitation & recidivism", "Family impacts"],
     link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6625803/",
     notes:
       "Accessible synthesis on why family contact matters and what outcomes it’s associated with; good grounding for policy rationale."
@@ -97,7 +93,6 @@ const SOURCES = [
     authors: "Arditti, J. A.",
     year: 2012,
     type: "Book",
-    themes: ["Family impacts", "Intergenerational"],
     link:
       "https://openlibrary.org/books/OL25140601M/Parental_incarceration_and_the_family",
     notes:
@@ -108,11 +103,10 @@ const SOURCES = [
     authors: "Vera Institute of Justice",
     year: 2010,
     type: "Policy report",
-    themes: ["Implementation", "Institutional design"],
     link:
       "https://vera-institute.files.svdcdn.com/production/downloads/publications/Why-ask-about-family-Final.pdf?dm=1647370696",
     notes:
-      "Implementation-facing rationale for centering family supports; useful for staff-facing framing and institutional constraints."
+      "Implementation-facing rationale for centering family supports -> useful for staff-facing framing and institutional constraints."
   }
 ];
 
