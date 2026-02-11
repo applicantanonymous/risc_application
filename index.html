@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Relational Infrastructure in Jail</title>
+
+  <meta
+    name="description"
+    content="An interactive thesis prototype proposing relational infrastructure inside correctional settings."
+  />
+
+  <meta property="og:title" content="Relational Infrastructure in Jail" />
+  <meta property="og:description"
+    content="Teaching parenting without practice: designing relational infrastructure in carceral settings." />
+  <meta property="og:type" content="article" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#top">
+      <span class="dot"></span>
+      <span>Thesis Prototype</span>
+    </a>
+
+    <nav class="nav">
+      <a href="#problem">Problem</a>
+      <a href="#solution">Solution</a>
+      <a href="#simulator">Simulator</a>
+      <a href="#ethics">Ethics</a>
+      <a href="#sources">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top" class="wrap">
+<article class="story">
+
+<p class="kicker">Parenting • Jail • Race • Masculinity • Reentry</p>
+
+<h1 class="headline">Relational Infrastructure in Jail</h1>
+
+<!-- ================= STORY OPENING ================= -->
+
+<section class="section">
+
+<h2>Teaching Parenting Without Practice</h2>
+
+<p>
+I first encountered this problem while facilitating a parenting program inside a county jail.
+The curriculum focused on communication, emotional regulation, and co-parenting — skills widely associated with family stability after release.
+</p>
+
+<p>
+During the sessions, the men were attentive and reflective. They spoke seriously about their children and with care about the kind of parents they hoped to be. Nothing about their participation suggested indifference or lack of motivation.
+</p>
+
+<p>
+The difficulty emerged elsewhere: there was almost no space to practice what they were learning. Phone calls were brief and expensive. Visits were infrequent and logistically complicated. Conversations with children often ended quickly — sometimes because the child was too young to sustain the interaction, sometimes because neither side knew how to carry the conversation forward within such narrow constraints.
+</p>
+
+<p>
+Over time, it became clear that the primary barrier was not willingness but infrastructure. We were teaching relational skills in an environment structurally organized to limit relational contact.
+</p>
+
+<p>
+The program itself was designed as race-neutral, yet the classroom was composed almost entirely of Black fathers — a reflection of broader patterns of racial disproportionality within the criminal legal system. This shaped the social and emotional terrain of the room in ways the curriculum did not explicitly address. Expectations surrounding fatherhood, masculinity, evaluation, and respectability were never absent; they formed the quiet backdrop against which these men were asked to demonstrate change.
+</p>
+
+<p>
+This raised a practical question that existing programming rarely confronts: what does it mean to teach parenting in a setting where the ordinary routines of parenting are largely unavailable?
+</p>
+
+</section>
+
+<!-- ================= ANALYTIC PIVOT ================= -->
+
+<section class="section">
+
+<h2>From Observation to Design Problem</h2>
+
+<p>
+The challenge is not whether incarcerated parents value their relationships. It is whether correctional environments provide sufficient opportunity to sustain them. Relational competence develops through repeated interaction; when opportunities for interaction are structurally constrained, relational capacity cannot simply be instructed into existence.
+</p>
+
+<p>
+Seen in this light, the issue is less a failure of individual effort than a problem of institutional design. If correctional systems limit the conditions under which relationships are maintained, then even well-designed parenting programs may struggle to translate into lived practice.
+</p>
+
+</section>
+
+<!-- ================= PROBLEM ================= -->
+
+<section id="problem" class="section">
+
+<h2>The Institutional Paradox</h2>
+
+<div class="grid-2">
+
+<div class="card">
+<h3>Structural Constraints</h3>
+<ul class="bullets">
+<li>Calls are expensive and time-limited</li>
+<li>Visits are difficult to schedule</li>
+<li>Communication is scarce and often surveilled</li>
+<li>Conflict escalates without opportunities for repair</li>
+<li>Emotional distance grows as routines of connection disappear</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>The Contradiction</h3>
+<p>
+Research consistently identifies family connection as one of the strongest predictors of successful reentry. Yet institutions often ration communication rather than treating it as a stabilizing resource.
+</p>
+
+<div class="callout">
+<p class="callout-title">Design Diagnosis</p>
+<p class="callout-body">
+Systems frequently subsidize isolation while charging for connection. The result is an incentive structure misaligned with long-term public safety.
+</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ================= SOLUTION ================= -->
+
+<section id="solution" class="section">
+
+<h2>A Relational Credit Economy</h2>
+
+<div class="card">
+<p class="lead">
+Rather than treating communication as a scarce privilege, this project reframes relational engagement as institutional infrastructure. The proposed intervention introduces an incentive system that expands access to family connection in response to sustained relational effort.
+</p>
+</div>
+
+<div class="grid-3">
+
+<div class="card">
+<h3>Earn Credits Through Engagement</h3>
+<ul class="bullets">
+<li>Guided conversation prompts</li>
+<li>Co-parenting exercises</li>
+<li>Shared journaling</li>
+<li>Family goal-setting</li>
+<li>Structured check-ins</li>
+<li>Reflection modules</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Unlock Expanded Connection</h3>
+<ul class="bullets">
+<li>Additional call minutes</li>
+<li>Extended messaging access</li>
+<li>Video visitation privileges</li>
+<li>Greater scheduling flexibility</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Ethical Orientation</h3>
+<p>
+The system rewards effort rather than prescribing behavioral ideals. Participants choose how to engage, while the institution increases the conditions under which connection becomes possible.
+</p>
+</div>
+
+</div>
+</section>
+
+<!-- ================= SIMULATOR ================= -->
+
+<section id="simulator" class="section">
+
+<h2>Interactive Simulator</h2>
+
+<p class="muted">
+Select engagement activities to see how relational effort might translate into expanded communication access.
+</p>
+
+<div class="grid-2">
+
+<div class="card">
+<h3>Engagement Activities</h3>
+<div id="activityList" class="checklist"></div>
+
+<div class="row">
+<button id="resetBtn" class="btn secondary">Reset</button>
+<button id="demoBtn" class="btn">Load Example</button>
+</div>
+</div>
+
+<div class="card">
+<h3>Credits and Access</h3>
+
+<div class="meter">
+<div class="meter-label">
+<span>Total Credits</span>
+<strong id="creditTotal">0</strong>
+</div>
+
+<div class="bar">
+<div id="barFill" class="bar-fill"></div>
+</div>
+</div>
+
+<div class="unlocks">
+<h4>Unlocked Privileges</h4>
+<ul id="unlockList" class="bullets"></ul>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ================= ETHICS ================= -->
+
+<section id="ethics" class="section">
+
+<h2>Ethical Design</h2>
+
+<div class="grid-2">
+
+<div class="card">
+<h3>What This Approach Does</h3>
+<ul class="bullets">
+<li>Expands opportunity for connection</li>
+<li>Supports relational practice</li>
+<li>Allows families to define meaningful engagement</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>What It Avoids</h3>
+<ul class="bullets">
+<li>Policing relationship content</li>
+<li>Imposing normative parenting models</li>
+<li>Using engagement data for discipline</li>
+</ul>
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= SOURCES ================= -->
+
+<section id="sources" class="section">
+
+<h2>Cited Academic Sources</h2>
+
+<p class="muted">
+Sources informing the theoretical and empirical foundations of this project.
+</p>
+
+<div id="sourceList" class="source-list"></div>
+
+</section>
+
+<footer class="footer">
+<p class="tiny muted">
+Prototype site accompanying ongoing thesis research.
+</p>
+</footer>
+
+</article>
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
