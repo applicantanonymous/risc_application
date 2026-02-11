@@ -2,47 +2,16 @@
 (() => {
   "use strict";
 
-  // ---- Config ----
+  // ---------- Simulator config ----------
   const ACTIVITIES = [
-    {
-      id: "guided_prompts",
-      name: "Guided conversation prompts",
-      credits: 10,
-      desc: "Short prompts for 10–15 minute calls to sustain conversation."
-    },
-    {
-      id: "coparenting",
-      name: "Co-parenting exercise",
-      credits: 15,
-      desc: "Shared planning routines with a fellow partner/ caregiver."
-    },
-    {
-      id: "journaling",
-      name: "Shared journaling",
-      credits: 12,
-      desc: "Asynchronous entries that build continuity between contacts."
-    },
-    {
-      id: "goal_setting",
-      name: "Family Games",
-      credits: 10,
-      desc: "Play games together during visits or calls to foster connection and create shared memories."
-    },
-    {
-      id: "structured_checkin",
-      name: "Structured check-in",
-      credits: 8,
-      desc: "Repair-focused: what went well, what was hard, one request for next time."
-    },
-    {
-      id: "reflection",
-      name: "Reflection module",
-      credits: 10,
-      desc: "Watch a short clip and answer reflection questions."
-    }
+    { id: "guided_prompts", name: "Guided conversation prompts", credits: 10, desc: "Short prompts for 10–15 minute calls to sustain continuity." },
+    { id: "coparenting", name: "Co-parenting exercise", credits: 15, desc: "Shared planning routines (school, schedules, boundaries) with a caregiver." },
+    { id: "journaling", name: "Shared journaling", credits: 12, desc: "Asynchronous entries that build continuity between contacts." },
+    { id: "goal_setting", name: "Family goal-setting", credits: 10, desc: "Agree on one small weekly goal and a realistic plan." },
+    { id: "structured_checkin", name: "Structured check-in", credits: 8, desc: "Repair-focused: what went well, what was hard, one request for next time." },
+    { id: "reflection", name: "Reflection module", credits: 10, desc: "Short content + reflection questions (practice + repetition)." }
   ];
 
-  // Thresholds → Privileges (prototype tiers)
   const UNLOCKS = [
     { threshold: 20, label: "Additional call minutes (+10 min/week)" },
     { threshold: 40, label: "Extended messaging access (+1 day/week)" },
@@ -50,7 +19,7 @@
     { threshold: 80, label: "Scheduling flexibility (priority slot request)" }
   ];
 
-  // ---- DOM ----
+  // ---------- DOM helpers ----------
   const $ = (sel) => document.querySelector(sel);
 
   const elActivities = $("#activities");
@@ -58,24 +27,14 @@
   const elUnlocks = $("#unlocksList");
   const elMeter = $("#meterFill");
   const elNextNote = $("#nextUnlockNote");
-
   const btnLoad = $("#loadExample");
   const btnReset = $("#reset");
 
-  // Defensive checks (so file can fail gracefully)
-  const required = [elActivities, elTotal, elUnlocks, elMeter, elNextNote, btnLoad, btnReset];
-  if (required.some((x) => !x)) {
-    // eslint-disable-next-line no-console
-    console.warn("script.js: Missing expected DOM nodes. Check index.html IDs.");
-    return;
-  }
+  // If the simulator isn't on the page for some reason, fail quietly
+  const simulatorReady = [elActivities, elTotal, elUnlocks, elMeter, elNextNote, btnLoad, btnReset].every(Boolean);
 
-  // ---- State ----
-  const state = {
-    selected: new Set()
-  };
+  const state = { selected: new Set() };
 
-  // ---- Helpers ----
   function computeTotal() {
     let total = 0;
     for (const id of state.selected) {
@@ -93,45 +52,9 @@
     return UNLOCKS.find((u) => total < u.threshold) || null;
   }
 
-  function setText(node, text) {
-    node.textContent = text;
-  }
-
-  function clear(node) {
-    node.innerHTML = "";
-  }
-
-  // Small UX: highlight nav as you scroll (optional)
-  function initScrollSpy() {
-    const links = Array.from(document.querySelectorAll(".nav a"))
-      .filter((a) => a.getAttribute("href")?.startsWith("#"));
-
-    if (!links.length) return;
-
-    const sections = links
-      .map((a) => document.querySelector(a.getAttribute("href")))
-      .filter(Boolean);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const id = `#${entry.target.id}`;
-          links.forEach((a) => {
-            const active = a.getAttribute("href") === id;
-            a.classList.toggle("active", active);
-          });
-        });
-      },
-      { root: null, threshold: 0.25 }
-    );
-
-    sections.forEach((sec) => observer.observe(sec));
-  }
-
-  // ---- Rendering ----
   function renderActivities() {
-    clear(elActivities);
+    if (!simulatorReady) return;
+    elActivities.innerHTML = "";
 
     ACTIVITIES.forEach((a) => {
       const row = document.createElement("div");
@@ -168,7 +91,6 @@
       btn.addEventListener("click", () => {
         if (state.selected.has(a.id)) state.selected.delete(a.id);
         else state.selected.add(a.id);
-
         renderActivities();
         updateOutputs();
       });
@@ -184,12 +106,13 @@
   }
 
   function updateOutputs() {
-    const total = computeTotal();
-    setText(elTotal, String(total));
+    if (!simulatorReady) return;
 
-    // Unlocked list
+    const total = computeTotal();
+    elTotal.textContent = String(total);
+
     const unlocked = getUnlocked(total);
-    clear(elUnlocks);
+    elUnlocks.innerHTML = "";
 
     if (unlocked.length === 0) {
       const li = document.createElement("li");
@@ -204,15 +127,10 @@
       });
     }
 
-    // Progress toward next unlock
     const next = getNextUnlock(total);
-
     if (!next) {
       elMeter.style.width = "100%";
-      setText(
-        elNextNote,
-        "All prototype privileges unlocked. (In practice, add additional tiers or rotate benefits.)"
-      );
+      elNextNote.textContent = "All prototype privileges unlocked. (In practice, add more tiers or rotate benefits.)";
       return;
     }
 
@@ -222,13 +140,9 @@
     const pct = Math.max(0, Math.min(1, progress)) * 100;
 
     elMeter.style.width = `${pct}%`;
-    setText(
-      elNextNote,
-      `Next unlock at ${next.threshold} credits: ${next.label} (need ${next.threshold - total} more).`
-    );
+    elNextNote.textContent = `Next unlock at ${next.threshold} credits: ${next.label} (need ${next.threshold - total} more).`;
   }
 
-  // ---- Actions ----
   function reset() {
     state.selected.clear();
     renderActivities();
@@ -237,20 +151,33 @@
 
   function loadExample() {
     state.selected.clear();
-    // Example bundle = 40 credits (unlocks first two tiers)
-    ["guided_prompts", "journaling", "structured_checkin", "goal_setting"].forEach((id) =>
-      state.selected.add(id)
-    );
+    // Example bundle = 40 credits (unlocks first 2 tiers)
+    ["guided_prompts", "journaling", "structured_checkin", "goal_setting"].forEach((id) => state.selected.add(id));
     renderActivities();
     updateOutputs();
   }
 
-  // ---- Wire up buttons ----
-  btnReset.addEventListener("click", reset);
-  btnLoad.addEventListener("click", loadExample);
+  if (simulatorReady) {
+    btnReset.addEventListener("click", reset);
+    btnLoad.addEventListener("click", loadExample);
+    renderActivities();
+    updateOutputs();
+  }
 
-  // ---- Init ----
-  renderActivities();
-  updateOutputs();
-  initScrollSpy();
-})();
+  // ---------- Scrollspy (nav highlight) ----------
+  function initScrollSpy() {
+    const links = Array.from(document.querySelectorAll(".nav a"))
+      .filter((a) => (a.getAttribute("href") || "").startsWith("#"));
+
+    if (!links.length) return;
+
+    const sections = links
+      .map((a) => document.querySelector(a.getAttribute("href")))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Pick the most visible intersecting section
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRati

@@ -27,8 +27,9 @@
       </a>
 
       <nav class="nav" aria-label="Primary">
+        <a href="#story">Story</a>
         <a href="#problem">Problem</a>
-        <a href="#diagnosis">Diagnosis</a>
+        <a href="#map">Map</a>
         <a href="#solution">Solution</a>
         <a href="#simulator">Simulator</a>
         <a href="#ethics">Ethics</a>
@@ -41,7 +42,7 @@
     <article class="story">
       <!-- ================= HERO ================= -->
       <section class="hero">
-        <div class="eyebrow">RISC application prompt 4 · anonymized prototype</div>
+        <div class="eyebrow">RISC prompt response · anonymized prototype</div>
         <h1 class="headline">Relational Infrastructure in Correctional Facilities</h1>
         <p class="deck">Designing Systems That Sustain Family Connection During Incarceration</p>
 
@@ -50,7 +51,7 @@
             <div class="card-kicker">Thesis prototype</div>
             <div class="card-title">Institutional design problem</div>
             <p class="card-text">
-              Family contact is treated as a scarce privilege even though connection predicts safer reentry.
+              Family contact predicts safer reentry, but communication is often treated as a scarce privilege.
               This prototype reframes contact as <b>relational infrastructure</b>.
             </p>
           </div>
@@ -59,70 +60,112 @@
             <div class="card-kicker">Approach</div>
             <div class="card-title">Behavior + incentives + modeling</div>
             <p class="card-text">
-              Combine behavioral design, incentive architecture, and predictive modeling to expand meaningful
-              engagement without compromising safety.
+              Combine behavioral design, incentive architecture, and predictive tools to expand meaningful engagement
+              without compromising institutional safety.
             </p>
           </div>
 
           <div class="card">
             <div class="card-kicker">Deliverable</div>
-            <div class="card-title">Policy simulator</div>
+            <div class="card-title">Simple policy simulator</div>
             <p class="card-text">
-              A decision tool for administrators to test scenarios (cost, staffing, security constraints) and
-              estimate downstream outcomes.
+              A transparent way to model how structured engagement could translate into expanded communication access.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- ================= STORY OPENING ================= -->
-      <section class="section" id="problem">
-        <h2>Project Pitch</h2>
+      <!-- ================= STORY ================= -->
+      <section class="section" id="story">
+        <h2>Story: Teaching Parenting Without the Conditions to Practice It</h2>
 
         <p>
-          Family connection is one of the strongest predictors of successful reentry and long-term public safety.
-          Yet correctional institutions often structure communication as a scarce privilege rather than a stabilizing resource.
-          This project reframes family contact as <b>relational infrastructure</b> — a system-level condition necessary for
-          behavioral change to translate into durable social outcomes.
+          I volunteer with a parenting program inside a county jail. When I began facilitating sessions, I expected our
+          conversations to focus on communication skills, emotional regulation, and co-parenting strategies. Instead,
+          discussions often shifted toward relationships — conflict with partners, disagreements over decision-making,
+          and the difficulty of maintaining a parental role while physically absent.
         </p>
 
         <p>
-          The proposed intervention combines behavioral design, incentive architecture, and predictive modeling to expand
-          meaningful family engagement while preserving institutional safety.
+          Communication itself was a recurring challenge. Phone calls are short and expensive. Visits are difficult to
+          coordinate. Messages do not always arrive when intended. Small misunderstandings can escalate simply because
+          there are few opportunities to resolve them.
+        </p>
+
+        <p>
+          What stood out was that the issue rarely appeared to be a lack of care for their children. Participants were
+          engaged and often thoughtful. The larger constraint seemed structural: we were teaching relational skills in an
+          environment where meaningful relational contact is inherently limited.
+        </p>
+
+        <h3>When parenting tools meet lived experience</h3>
+        <p>
+          Some participants were hesitant about the parenting strategies we discussed. This was less resistance than
+          skepticism. Several felt they already knew how to parent based on how they themselves were raised, while others
+          viewed certain recommendations — such as avoiding physical discipline — as inconsistent with their cultural norms.
+        </p>
+
+        <p>
+          Changing practices that are closely tied to one’s upbringing likely requires more than brief exposure to new
+          frameworks. It requires repetition, opportunities to try a different approach, and enough autonomy for the change
+          to feel self-directed. An eight-hour program can introduce ideas. It is unlikely to reshape long-standing behavioral
+          patterns on its own.
+        </p>
+
+        <h3>Parenting, authority, and identity</h3>
+        <p>
+          Many conversations also reflected broader expectations around fatherhood. Being a parent was frequently described
+          in terms of providing, protecting, and maintaining respect within the household — roles that incarceration disrupts
+          simultaneously.
+        </p>
+
+        <p>
+          Some participants worried their children would grow distant. Others described feeling excluded from everyday family
+          decisions. These concerns shaped how they interpreted topics such as shared authority and co-parenting. Over time,
+          it became difficult to treat these dynamics as individual attitudes. They appeared more closely tied to widely held
+          social expectations — expectations that do not disappear simply because someone is incarcerated.
         </p>
 
         <div class="callout">
-          <div class="callout-title">Core claim</div>
+          <div class="callout-title">The question that stayed with me</div>
           <p class="callout-text">
-            If institutions constrain the conditions under which relationships can be maintained, then even strong programs
-            may struggle to translate into lived practice. The barrier is often infrastructure, not motivation.
+            <b>What does it mean to teach parenting in a setting where the ordinary routines of parenting are largely unavailable?</b>
           </p>
         </div>
       </section>
 
-      <!-- ================= DIAGNOSIS ================= -->
-      <section class="section" id="diagnosis">
-        <h2>Diagnose the Problem</h2>
+      <!-- ================= PROBLEM ================= -->
+      <section class="section" id="problem">
+        <h2>Problem</h2>
 
         <p>
-          Across the United States, approximately <b>5 million children</b> have experienced the incarceration of a parent.
-          A large body of research links sustained family contact during incarceration to:
+          Relationships develop through repeated interaction — everyday conversations, small disagreements, moments of repair.
+          When those interactions become scarce, distance tends to grow regardless of intention.
         </p>
-
-        <ul class="bullets">
-          <li>lower recidivism</li>
-          <li>improved post-release employment</li>
-          <li>stronger child wellbeing</li>
-          <li>reduced intergenerational justice involvement</li>
-        </ul>
 
         <p>
-          Despite this evidence, communication opportunities remain heavily constrained.
+          Correctional systems often identify family connection as an important predictor of successful reentry. Yet many
+          operational policies limit communication rather than supporting it.
         </p>
 
-        <h3>Structural Constraints</h3>
+        <div class="callout subtle">
+          <div class="callout-title">Design tension</div>
+          <p class="callout-text">
+            We ask people to strengthen relationships while structuring the environment in ways that make sustained connection difficult.
+            The challenge is not purely behavioral. It is organizational.
+          </p>
+        </div>
+
+        <div class="callout">
+          <div class="callout-title">One sentence that matters</div>
+          <p class="callout-text">
+            If relationships are built through repetition, then limiting contact effectively limits the possibility of relational change.
+          </p>
+        </div>
+
+        <h3>Structural constraints</h3>
         <p class="muted">
-          Visual concept: flow diagram showing friction points between parent → institution → family.
+          Visual concept: friction points between parent → institution → family.
         </p>
 
         <div class="viz-block">
@@ -138,9 +181,7 @@
             </div>
           </div>
 
-          <!-- Simple inline SVG diagram (no external libs) -->
           <svg class="flow" viewBox="0 0 1200 260" role="img" aria-label="Flow diagram of friction points between parent, institution, and family">
-            <!-- nodes -->
             <g class="node">
               <rect x="40" y="70" rx="18" ry="18" width="260" height="120"></rect>
               <text x="170" y="120" text-anchor="middle" class="node-title">Parent in custody</text>
@@ -160,7 +201,6 @@
               <text x="1030" y="152" text-anchor="middle" class="node-sub">time + resources</text>
             </g>
 
-            <!-- arrows -->
             <defs>
               <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
                 <path d="M0,0 L10,5 L0,10 z"></path>
@@ -170,7 +210,6 @@
             <path class="arrow" marker-end="url(#arrow)" d="M300,130 C360,130 400,130 470,130"></path>
             <path class="arrow" marker-end="url(#arrow)" d="M730,130 C800,130 840,130 900,130"></path>
 
-            <!-- friction labels -->
             <g class="friction">
               <rect x="330" y="92" rx="12" ry="12" width="170" height="36"></rect>
               <text x="415" y="116" text-anchor="middle">time limits + cost</text>
@@ -192,41 +231,88 @@
               <div class="note-title">Observed pattern</div>
               <p class="note-text">
                 Relational skills are taught, but contact is rationed. Conversations are brief, logistically hard,
-                and frequently end before meaningful repair or continuity can happen.
+                and often end before repair or continuity can happen.
               </p>
             </div>
             <div class="note">
               <div class="note-title">Design implication</div>
               <p class="note-text">
-                “Relational competence” develops through repeated interaction. If interaction is structurally scarce,
-                competence cannot be reliably instructed into existence.
+                If you want behavioral change to stick, you need repeated opportunities to practice it.
+                Many jail communication systems do the opposite.
               </p>
             </div>
           </div>
         </div>
+      </section>
 
-        <div class="callout subtle">
-          <div class="callout-title">Institutional paradox</div>
-          <p class="callout-text">
-            Research identifies family connection as a predictor of successful reentry, yet institutions often
-            ration communication rather than treating it as stabilizing infrastructure.
-          </p>
+      <!-- ================= MAP ================= -->
+      <section class="section" id="map">
+        <h2>Map: Scale of the system</h2>
+
+        <p>
+          I want to ground this in geography. Jails are not abstract — they’re local, and they vary enormously by county.
+          A county-level map makes it easier to see where incarceration is concentrated and, by extension, where family
+          relationships are being strained at scale.
+        </p>
+
+        <div class="map-grid">
+          <div class="map-card">
+            <div class="map-kicker">Planned visualization</div>
+            <div class="map-title">County-level jail population / rate (choropleth)</div>
+            <p class="map-text muted">
+              This box is a placeholder for a real data-driven map (e.g., Vera’s county incarceration trends).
+              The goal is to show concentration and approximate reach (people + families).
+            </p>
+
+            <div class="map-frame" role="img" aria-label="Placeholder map frame">
+              <div class="map-placeholder">
+                <div class="map-placeholder-title">US county map placeholder</div>
+                <div class="map-placeholder-sub">Hook up data in script.js when ready</div>
+              </div>
+            </div>
+
+            <p class="muted small">
+              Note: the final version should cite the data source and the reference year (or range).
+            </p>
+          </div>
+
+          <div class="map-card">
+            <div class="map-kicker">Scale metric</div>
+            <div class="map-title">Who this could affect</div>
+            <p class="map-text">
+              Even a “small” change to communication policy can have large effects because local jails touch a high volume of
+              families over time. The point of the map is to connect the design problem to where it shows up most intensely.
+            </p>
+
+            <div class="metric">
+              <div class="metric-k">Anchor statistic to display next to the map</div>
+              <div class="metric-v">≈ 5,000,000 children</div>
+              <div class="metric-note muted">
+                who have experienced parental incarceration (add the full citation in Sources).
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- ================= SOLUTION ================= -->
       <section class="section" id="solution">
-        <h2>A Relational Credit Economy</h2>
+        <h2>Solution: A Relational Credit Economy</h2>
 
         <p>
-          Rather than treating communication as a scarce privilege, this project treats family connection as infrastructure:
-          access expands in response to sustained relational effort. The intervention introduces a transparent incentive system
-          that increases contact opportunity while avoiding moralized or normative “good parenting” enforcement.
+          If institutional structure shapes what kinds of relationships are possible, then improving outcomes may require more
+          than expanding programming. It may require redesigning the conditions under which relationships are maintained.
+        </p>
+
+        <p>
+          Rather than treating communication as a scarce privilege, this proposal treats family connection as stabilizing
+          infrastructure: access expands in response to sustained relational effort. The point is not to prescribe what “good
+          parenting” looks like, but to create conditions where connection remains possible.
         </p>
 
         <div class="split">
           <div class="panel">
-            <h3>Earn Credits Through Engagement</h3>
+            <h3>Earn credits through engagement</h3>
             <ul class="bullets">
               <li>guided conversation prompts</li>
               <li>co-parenting exercises</li>
@@ -236,12 +322,12 @@
               <li>reflection modules</li>
             </ul>
             <p class="muted small">
-              Activities are designed for constrained settings (10–15 minute calls, asynchronous options, low bandwidth).
+              Activities are designed for constrained settings (short calls, asynchronous options, low bandwidth).
             </p>
           </div>
 
           <div class="panel">
-            <h3>Unlock Expanded Connection</h3>
+            <h3>Unlock expanded connection</h3>
             <ul class="bullets">
               <li>additional call minutes</li>
               <li>extended messaging access</li>
@@ -254,46 +340,20 @@
           </div>
         </div>
 
-        <h3>Where ML fits (without becoming surveillance)</h3>
-        <div class="ml-grid">
-          <div class="ml-card">
-            <div class="ml-title">Dose-response modeling</div>
-            <p class="ml-text">Estimate marginal benefits of contact “dosage” on reentry outcomes.</p>
-            <div class="ml-viz" aria-hidden="true">
-              <div class="spark"></div>
-              <div class="spark"></div>
-              <div class="spark"></div>
-            </div>
-          </div>
-          <div class="ml-card">
-            <div class="ml-title">Engagement optimization</div>
-            <p class="ml-text">Use bandits/RL to recommend activities most likely to sustain participation.</p>
-            <div class="ml-viz" aria-hidden="true">
-              <div class="chip"></div><div class="chip"></div><div class="chip"></div><div class="chip"></div>
-            </div>
-          </div>
-          <div class="ml-card">
-            <div class="ml-title">Early warning indicators</div>
-            <p class="ml-text">Detect sudden engagement drops to trigger supportive, non-punitive outreach.</p>
-            <div class="ml-viz" aria-hidden="true">
-              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-            </div>
-          </div>
-          <div class="ml-card">
-            <div class="ml-title">Facility simulator</div>
-            <p class="ml-text">Stress-test policy tradeoffs under staffing/security constraints.</p>
-            <div class="ml-viz" aria-hidden="true">
-              <div class="gridviz"></div>
-            </div>
-          </div>
-        </div>
+        <h3>Feasibility</h3>
+        <p>
+          This does not necessarily require new hardware. Many facilities already use secure tablets for messaging,
+          account access, and approved content. A structured engagement module could run as an additional application
+          on an existing system. The main shift is policy: treating communication as something to deliberately support,
+          not simply ration.
+        </p>
       </section>
 
       <!-- ================= SIMULATOR ================= -->
       <section class="section" id="simulator">
         <h2>Interactive Simulator</h2>
         <p class="muted">
-          Select engagement activities to see how relational effort translates into expanded access.
+          Select engagement activities to see how relational effort could translate into expanded communication access.
           (Prototype logic: credits unlock privileges at thresholds.)
         </p>
 
@@ -341,7 +401,7 @@
             <h3>What this approach does</h3>
             <ul class="bullets ok">
               <li>expands opportunity for connection</li>
-              <li>supports relational practice under constraints</li>
+              <li>supports practice under constraints</li>
               <li>lets families define meaningful engagement</li>
               <li>keeps logic auditable and transparent</li>
             </ul>
@@ -362,7 +422,7 @@
           <div class="callout-title">Guardrails</div>
           <p class="callout-text">
             Data minimization, strict use limitations, fairness monitoring, clear appeals, and human oversight.
-            The system’s goal is to increase opportunity for connection, not to evaluate “worthy” families.
+            The objective is not to monitor relationships — it is to make sustained connection more feasible.
           </p>
         </div>
       </section>
@@ -371,20 +431,20 @@
       <section class="section" id="sources">
         <h2>Sources</h2>
         <p class="muted">
-          (Provide full citations in your final PDF. Below is a short list of foundational references.)
+          Replace these placeholders with full citations in the final PDF. Add the exact year for any “current” statistic.
         </p>
 
         <div class="sources">
           <div class="source">
-            <div class="source-title">Visitation &amp; recidivism</div>
+            <div class="source-title">Visitation &amp; reentry outcomes</div>
             <div class="source-text">Bales &amp; Mears (2008); Mears et al. (2012)</div>
           </div>
           <div class="source">
-            <div class="source-title">Family contact evidence synthesis</div>
+            <div class="source-title">Evidence synthesis on family contact</div>
             <div class="source-text">Folk et al. (2019)</div>
           </div>
           <div class="source">
-            <div class="source-title">Family-process impacts</div>
+            <div class="source-title">Family-process perspective</div>
             <div class="source-text">Arditti (2012)</div>
           </div>
           <div class="source">
@@ -397,118 +457,13 @@
           <div class="footer-inner">
             <span>Export tip: Print → “Save as PDF” for submission.</span>
             <span class="sep">·</span>
-            <span>Remove identifying metadata in filename and document properties.</span>
+            <span>Keep the file and PDF metadata anonymous.</span>
           </div>
         </footer>
       </section>
     </article>
   </main>
 
-  <script>
-    // ---- Relational Credit Economy: Prototype Simulator ----
-    const ACTIVITIES = [
-      { id: "guided_prompts", name: "Guided conversation prompts", credits: 10, desc: "Short prompts for 10–15 minute calls to sustain continuity." },
-      { id: "coparenting", name: "Co-parenting exercise", credits: 15, desc: "Shared planning routines (school, schedules, boundaries) with a caregiver." },
-      { id: "journaling", name: "Shared journaling", credits: 12, desc: "Asynchronous entries that build continuity between contacts." },
-      { id: "goal_setting", name: "Family goal-setting", credits: 10, desc: "Agree on one small weekly goal and a realistic plan." },
-      { id: "structured_checkin", name: "Structured check-in", credits: 8, desc: "Repair-focused: what went well, what was hard, one request for next time." },
-      { id: "reflection", name: "Reflection module", credits: 10, desc: "Watch a short clip and answer reflection questions (practice + repetition)." }
-    ];
-
-    const UNLOCKS = [
-      { threshold: 20, label: "Additional call minutes (+10 min/week)" },
-      { threshold: 40, label: "Extended messaging access (+1 day/week)" },
-      { threshold: 60, label: "Video visitation privilege (+1/month)" },
-      { threshold: 80, label: "Scheduling flexibility (priority slot request)" }
-    ];
-
-    const state = { selected: new Set() };
-
-    const elActivities = document.getElementById("activities");
-    const elTotal = document.getElementById("totalCredits");
-    const elUnlocks = document.getElementById("unlocksList");
-    const elMeter = document.getElementById("meterFill");
-    const elNextNote = document.getElementById("nextUnlockNote");
-
-    function computeTotal(){
-      let total = 0;
-      for (const id of state.selected){
-        const a = ACTIVITIES.find(x => x.id === id);
-        if (a) total += a.credits;
-      }
-      return total;
-    }
-
-    function getUnlocked(total){
-      return UNLOCKS.filter(u => total >= u.threshold);
-    }
-
-    function getNextUnlock(total){
-      return UNLOCKS.find(u => total < u.threshold) || null;
-    }
-
-    function renderActivities(){
-      elActivities.innerHTML = "";
-      ACTIVITIES.forEach(a => {
-        const row = document.createElement("div");
-        row.className = "activity";
-
-        const left = document.createElement("div");
-        left.className = "activity-left";
-
-        const title = document.createElement("div");
-        title.className = "activity-name";
-        title.textContent = a.name;
-
-        const desc = document.createElement("div");
-        desc.className = "activity-desc";
-        desc.textContent = a.desc;
-
-        left.appendChild(title);
-        left.appendChild(desc);
-
-        const right = document.createElement("div");
-        right.className = "activity-right";
-
-        const credit = document.createElement("div");
-        credit.className = "activity-credits";
-        credit.textContent = `${a.credits} credits`;
-
-        const btn = document.createElement("button");
-        const selected = state.selected.has(a.id);
-        btn.className = "btn " + (selected ? "danger" : "");
-        btn.type = "button";
-        btn.textContent = selected ? "Remove" : "Add";
-
-        btn.addEventListener("click", () => {
-          if (state.selected.has(a.id)) state.selected.delete(a.id);
-          else state.selected.add(a.id);
-          renderActivities();
-          updateOutputs();
-        });
-
-        right.appendChild(credit);
-        right.appendChild(btn);
-
-        row.appendChild(left);
-        row.appendChild(right);
-
-        elActivities.appendChild(row);
-      });
-    }
-
-    function updateOutputs(){
-      const total = computeTotal();
-      elTotal.textContent = total;
-
-      const unlocked = getUnlocked(total);
-      elUnlocks.innerHTML = "";
-      if (unlocked.length === 0){
-        const li = document.createElement("li");
-        li.className = "muted";
-        li.textContent = "None yet.";
-        elUnlocks.appendChild(li);
-      } else {
-        unlocked.forEach(u => {
-          const li = document.createElement("li");
-          li.textContent
+  <script src="script.js"></script>
+</body>
+</html>
