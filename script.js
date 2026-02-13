@@ -1,183 +1,421 @@
+:root{
+  --bg:#0b0c10;
+  --panel:#11131a;
+  --panel2:#0f1117;
+  --text:#f4f6fb;
+  --muted:#b7bfd3;
+  --muted2:#8f97aa;
+  --border:rgba(255,255,255,.10);
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius: 18px;
+  --radius2: 24px;
+  --max: 1100px;
+}
 
-(() => {
-  "use strict";
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  background: radial-gradient(900px 500px at 20% 0%, rgba(93,150,255,.18), transparent 55%),
+              radial-gradient(800px 450px at 90% 20%, rgba(255,173,72,.14), transparent 55%),
+              var(--bg);
+  color:var(--text);
+  line-height:1.55;
+}
 
-  // ---------- Simulator config ----------
-  const ACTIVITIES = [
-    { id: "guided_prompts", name: "Guided conversation prompts", credits: 10, desc: "Short prompts for 10–15 minute calls to sustain continuity." },
-    { id: "coparenting", name: "Co-parenting exercise", credits: 15, desc: "Shared planning routines (school, schedules, boundaries) with a caregiver." },
-    { id: "journaling", name: "Shared journaling", credits: 12, desc: "Asynchronous entries that build continuity between contacts." },
-    { id: "goal_setting", name: "Family goal-setting", credits: 10, desc: "Agree on one small weekly goal and a realistic plan." },
-    { id: "structured_checkin", name: "Structured check-in", credits: 8, desc: "Repair-focused: what went well, what was hard, one request for next time." },
-    { id: "reflection", name: "Reflection module", credits: 10, desc: "Short content + reflection questions (practice + repetition)." }
-  ];
+a{ color:inherit; }
+code{
+  background: rgba(255,255,255,.06);
+  padding: .1rem .35rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.08);
+}
 
-  const UNLOCKS = [
-    { threshold: 20, label: "Additional call minutes (+10 min/week)" },
-    { threshold: 40, label: "Extended messaging access (+1 day/week)" },
-    { threshold: 60, label: "Video visitation privilege (+1/month)" },
-    { threshold: 80, label: "Scheduling flexibility (priority slot request)" }
-  ];
+.skip{
+  position:absolute;
+  top:-40px; left:10px;
+  background:var(--text);
+  color:#000;
+  padding:.5rem .75rem;
+  border-radius:10px;
+  z-index:999;
+}
+.skip:focus{ top:10px; }
 
-  // ---------- DOM helpers ----------
-  const $ = (sel) => document.querySelector(sel);
+.container{
+  width: min(var(--max), calc(100% - 2rem));
+  margin: 0 auto;
+}
 
-  const elActivities = $("#activities");
-  const elTotal = $("#totalCredits");
-  const elUnlocks = $("#unlocksList");
-  const elMeter = $("#meterFill");
-  const elNextNote = $("#nextUnlockNote");
-  const btnLoad = $("#loadExample");
-  const btnReset = $("#reset");
+.topbar{
+  position: sticky;
+  top:0;
+  z-index: 100;
+  background: rgba(11,12,16,.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.topbar__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding: .9rem 0;
+}
+.brand__title{
+  font-size:.85rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color: var(--muted);
+}
+.brand__sub{
+  font-size:.85rem;
+  color: var(--muted2);
+  margin-top:.15rem;
+}
+.nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.9rem;
+}
+.nav a{
+  text-decoration:none;
+  font-size:.95rem;
+  padding:.35rem .55rem;
+  border-radius: 12px;
+  border:1px solid transparent;
+  color: var(--muted);
+}
+.nav a:hover{
+  border-color: rgba(255,255,255,.16);
+  color: var(--text);
+}
 
-  // If the simulator isn't on the page for some reason, fail quietly
-  const simulatorReady = [elActivities, elTotal, elUnlocks, elMeter, elNextNote, btnLoad, btnReset].every(Boolean);
+.hero{
+  padding: 3.2rem 0 2rem;
+}
+.hero__grid{
+  display:grid;
+  gap: 1.25rem;
+  grid-template-columns: 1.05fr .95fr;
+  align-items:start;
+}
+@media (max-width: 960px){
+  .hero__grid{ grid-template-columns: 1fr; }
+}
 
-  const state = { selected: new Set() };
+.kicker{
+  margin:0 0 .25rem;
+  color: var(--muted);
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  font-size:.9rem;
+}
+h1{
+  margin:.2rem 0 .65rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height:1.12;
+}
+.hook{
+  margin:0 0 1rem;
+  color: var(--muted);
+  font-size:1.05rem;
+}
+.lede{
+  margin: 1rem 0 0;
+  color: var(--text);
+  font-size:1.05rem;
+}
 
-  function computeTotal() {
-    let total = 0;
-    for (const id of state.selected) {
-      const a = ACTIVITIES.find((x) => x.id === id);
-      if (a) total += a.credits;
-    }
-    return total;
-  }
+.section{
+  padding: 2.25rem 0;
+}
+.section h2{
+  margin:0 0 .75rem;
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+}
+.section__lede{
+  margin:0 0 1.25rem;
+  color: var(--muted);
+  max-width: 70ch;
+}
 
-  function getUnlocked(total) {
-    return UNLOCKS.filter((u) => total >= u.threshold);
-  }
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  padding: 1.1rem 1.1rem;
+  box-shadow: var(--shadow);
+}
 
-  function getNextUnlock(total) {
-    return UNLOCKS.find((u) => total < u.threshold) || null;
-  }
+.hero__cards{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .85rem;
+  margin: 1rem 0 1rem;
+}
+@media (max-width: 700px){
+  .hero__cards{ grid-template-columns: 1fr; }
+}
 
-  function renderActivities() {
-    if (!simulatorReady) return;
-    elActivities.innerHTML = "";
+.stat{
+  padding: .95rem 1rem;
+}
+.stat__value{
+  font-size: 1.9rem;
+  font-weight: 750;
+  letter-spacing: .01em;
+}
+.stat__label{
+  color: var(--muted);
+  margin-top:.2rem;
+  font-size:.95rem;
+}
+.stat.big .stat__value{ font-size: 2.2rem; }
 
-    ACTIVITIES.forEach((a) => {
-      const row = document.createElement("div");
-      row.className = "activity";
+.grid-2{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 900px){
+  .grid-2{ grid-template-columns: 1fr; }
+}
 
-      const left = document.createElement("div");
-      left.className = "activity-left";
+.grid-3{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+@media (max-width: 900px){
+  .grid-3{ grid-template-columns: 1fr; }
+}
 
-      const title = document.createElement("div");
-      title.className = "activity-name";
-      title.textContent = a.name;
+.bullets{
+  margin:.6rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+}
+.bullets li{ margin:.35rem 0; }
 
-      const desc = document.createElement("div");
-      desc.className = "activity-desc";
-      desc.textContent = a.desc;
+.callout{
+  margin-top: 1.1rem;
+  padding: 1rem 1.05rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.05);
+  color: var(--text);
+}
 
-      left.appendChild(title);
-      left.appendChild(desc);
+.muted{ color: var(--muted2); }
+.small{ font-size:.92rem; }
 
-      const right = document.createElement("div");
-      right.className = "activity-right";
+.hero__visual .figure img{
+  width:100%;
+  height:auto;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.12);
+}
+.figure__title{
+  color: var(--muted);
+  font-size:.95rem;
+  margin-bottom:.7rem;
+}
+.figure__caption{
+  margin-top:.6rem;
+  color: var(--muted2);
+  font-size:.9rem;
+}
 
-      const credit = document.createElement("div");
-      credit.className = "activity-credits";
-      credit.textContent = `${a.credits} credits`;
+.mini-quote{
+  margin-top: .85rem;
+  padding: .85rem .95rem;
+  border-radius: 16px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
+}
 
-      const selected = state.selected.has(a.id);
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = `btn ${selected ? "danger" : ""}`;
-      btn.textContent = selected ? "Remove" : "Add";
-      btn.setAttribute("aria-pressed", String(selected));
+.friction{
+  margin-top: 1rem;
+}
+.friction__row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+  flex-wrap:wrap;
+  margin-top:.5rem;
+}
+.pill{
+  flex: 1 1 220px;
+  padding: .8rem .9rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  text-align:center;
+}
+.pill span{
+  display:block;
+  margin-top:.25rem;
+  color: var(--muted2);
+  font-size:.9rem;
+}
+.arrow{
+  color: var(--muted);
+  font-size: 1.2rem;
+  padding: 0 .25rem;
+}
+.friction__notes{
+  display:flex;
+  gap:.75rem;
+  flex-wrap:wrap;
+  margin-top: .75rem;
+}
+.note{
+  flex: 1 1 260px;
+  padding: .75rem .85rem;
+  border-radius: 16px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.10);
+  color: var(--muted);
+}
 
-      btn.addEventListener("click", () => {
-        if (state.selected.has(a.id)) state.selected.delete(a.id);
-        else state.selected.add(a.id);
-        renderActivities();
-        updateOutputs();
-      });
+.map__placeholder{
+  margin-top:.75rem;
+  height: 260px;
+  border-radius: 18px;
+  border: 1px dashed rgba(255,255,255,.18);
+  background: rgba(255,255,255,.03);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color: var(--muted);
+}
+.map__anchor{
+  margin:.85rem 0 0;
+  color: var(--muted);
+}
 
-      right.appendChild(credit);
-      right.appendChild(btn);
+.sim__header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+}
+.sim__buttons{ display:flex; gap:.5rem; flex-wrap:wrap; }
 
-      row.appendChild(left);
-      row.appendChild(right);
+.btn{
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+  border-radius: 14px;
+  padding: .5rem .75rem;
+  cursor:pointer;
+}
+.btn:hover{ background: rgba(255,255,255,.10); }
+.btn--ghost{
+  background: transparent;
+}
 
-      elActivities.appendChild(row);
-    });
-  }
+.checklist{
+  margin-top:.85rem;
+  display:flex;
+  flex-direction:column;
+  gap:.6rem;
+}
+.item{
+  display:flex;
+  align-items:flex-start;
+  gap:.7rem;
+  padding:.7rem .75rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+}
+.item input{ transform: translateY(2px); }
+.item__meta{
+  display:flex;
+  flex-direction:column;
+  gap:.15rem;
+}
+.item__title{ font-weight:650; }
+.item__desc{ color: var(--muted2); font-size:.92rem; }
+.item__pts{ color: var(--muted); font-size:.92rem; margin-top:.15rem; }
 
-  function updateOutputs() {
-    if (!simulatorReady) return;
+.meter{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:1rem;
+  margin-top:.5rem;
+}
+.meter__label{ color: var(--muted); }
+.meter__value{
+  font-size: 2.2rem;
+  font-weight: 750;
+}
 
-    const total = computeTotal();
-    elTotal.textContent = String(total);
+.progress{ margin-top: 1rem; }
+.progress__label{ color: var(--muted); margin-bottom:.4rem; }
+.progress__bar{
+  width:100%;
+  height: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  overflow:hidden;
+}
+.progress__fill{
+  height:100%;
+  background: rgba(140,180,255,.65);
+  width:0%;
+}
+.progress__text{ margin-top:.45rem; color: var(--muted2); }
 
-    const unlocked = getUnlocked(total);
-    elUnlocks.innerHTML = "";
+.unlocks{ margin-top: 1rem; }
+.unlocks__label{ color: var(--muted); margin-bottom:.35rem; }
+.unlocks__list{
+  margin:.25rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+}
 
-    if (unlocked.length === 0) {
-      const li = document.createElement("li");
-      li.className = "muted";
-      li.textContent = "None yet.";
-      elUnlocks.appendChild(li);
-    } else {
-      unlocked.forEach((u) => {
-        const li = document.createElement("li");
-        li.textContent = `${u.threshold}+: ${u.label}`;
-        elUnlocks.appendChild(li);
-      });
-    }
+.refs{
+  margin: .75rem 0 0;
+  padding-left: 1.25rem;
+  color: var(--text);
+}
+.refs li{
+  margin: .9rem 0;
+}
+.ref__meta{
+  margin-top:.35rem;
+  color: var(--muted2);
+  font-size:.92rem;
+}
+.ref__src{ color: var(--muted); }
 
-    const next = getNextUnlock(total);
-    if (!next) {
-      elMeter.style.width = "100%";
-      elNextNote.textContent = "All prototype privileges unlocked. (In practice, add more tiers or rotate benefits.)";
-      return;
-    }
+.footer{
+  padding: 1.5rem 0 2.5rem;
+  border-top: 1px solid var(--border);
+  margin-top: 1.5rem;
+}
+.footer__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+.top{
+  text-decoration:none;
+  padding:.35rem .55rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  color: var(--muted);
+}
+.top:hover{ color: var(--text); border-color: rgba(255,255,255,.20); }
 
-    const prev = unlocked.length ? unlocked[unlocked.length - 1].threshold : 0;
-    const span = next.threshold - prev;
-    const progress = span === 0 ? 1 : (total - prev) / span;
-    const pct = Math.max(0, Math.min(1, progress)) * 100;
-
-    elMeter.style.width = `${pct}%`;
-    elNextNote.textContent = `Next unlock at ${next.threshold} credits: ${next.label} (need ${next.threshold - total} more).`;
-  }
-
-  function reset() {
-    state.selected.clear();
-    renderActivities();
-    updateOutputs();
-  }
-
-  function loadExample() {
-    state.selected.clear();
-    // Example bundle = 40 credits (unlocks first 2 tiers)
-    ["guided_prompts", "journaling", "structured_checkin", "goal_setting"].forEach((id) => state.selected.add(id));
-    renderActivities();
-    updateOutputs();
-  }
-
-  if (simulatorReady) {
-    btnReset.addEventListener("click", reset);
-    btnLoad.addEventListener("click", loadExample);
-    renderActivities();
-    updateOutputs();
-  }
-
-  // ---------- Scrollspy (nav highlight) ----------
-  function initScrollSpy() {
-    const links = Array.from(document.querySelectorAll(".nav a"))
-      .filter((a) => (a.getAttribute("href") || "").startsWith("#"));
-
-    if (!links.length) return;
-
-    const sections = links
-      .map((a) => document.querySelector(a.getAttribute("href")))
-      .filter(Boolean);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Pick the most visible intersecting section
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRati
