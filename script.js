@@ -45,7 +45,7 @@ window.addEventListener("DOMContentLoaded", () => {
   ];
 
   const UNLOCKS = [
-    { at: 15, label: "Unlock: +5 call minutes/week" },
+    { at: 15, label: "Unlock: + 10 call minutes/week" },
     { at: 30, label: "Unlock: extended messaging access" },
     { at: 45, label: "Unlock: +1 video visit/month (where available)" },
     { at: 60, label: "Unlock: greater scheduling flexibility" }
@@ -166,4 +166,31 @@ window.addEventListener("DOMContentLoaded", () => {
   renderActivities();
   updateSimulator();
 });
+
+
+function fmt(n){
+  return Math.round(n).toLocaleString();
+}
+
+function recomputeScale(){
+  const parentsPerCohort = Number(document.getElementById("parentsPerCohort").value || 0);
+  const cohortsPerYear   = Number(document.getElementById("cohortsPerYear").value || 0);
+  const familyPerParent  = Number(document.getElementById("familyPerParent").value || 0);
+
+  const parentsServed = parentsPerCohort * cohortsPerYear;
+  const familyReached = parentsServed * familyPerParent;
+  const totalTouched  = parentsServed + familyReached;
+
+  document.getElementById("parentsServed").textContent = fmt(parentsServed);
+  document.getElementById("familyReached").textContent = fmt(familyReached);
+  document.getElementById("totalTouched").textContent  = fmt(totalTouched);
+}
+
+["parentsPerCohort","cohortsPerYear","familyPerParent"].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener("input", recomputeScale);
+});
+
+recomputeScale();
+
 
