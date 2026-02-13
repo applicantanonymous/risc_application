@@ -8,6 +8,7 @@
   --muted2:#6a7687;
   --border:rgba(17,19,24,.12);
   --shadow: 0 10px 26px rgba(17,19,24,.08);
+  --font-base: 14.5px;
 
   /* ACCENTS (for “more colour” in underlines etc.) */
   --accent:#2f5cff;
