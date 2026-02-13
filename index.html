@@ -256,48 +256,71 @@
 <section class="section" id="scale">
   <div class="container">
     <h2>Scale</h2>
-
     <p class="section__lede">
-      This intervention is designed for incarceration-affected families first, but has effects that transperse into other areas of society.
+      This intervention is designed for incarceration-affected families first. The core question is simple:
+      how many people does it touch each year if implemented in one jail system?
     </p>
 
-    <dl class="impact-dl">
-      <div class="impact-dl__row">
-        <dt>Primary impact</dt>
-        <dd>Parents in jail and their children/caregivers (more consistent contact and more opportunities for repair).</dd>
-      </div>
+    <div class="scale-estimate">
+      <div class="card estimate">
+        <h3>Estimated annual reach</h3>
 
-      <div class="impact-dl__row">
-        <dt>Secondary impact</dt>
-        <dd>Reduces recidivism, and consequently crime, and consequently tax burden elsewhere.</dd>
-      </div>
-    </dl>
+        <div class="estimate__grid">
+          <div class="estimate__row">
+            <div class="estimate__label">Parents served</div>
+            <div class="estimate__value" id="parentsServed">—</div>
+          </div>
 
-    <!-- ⭐ NEW LAYOUT -->
-    <div class="scale-layout">
+          <div class="estimate__row">
+            <div class="estimate__label">Children + caregivers reached</div>
+            <div class="estimate__value" id="familyReached">—</div>
+          </div>
 
-      <!-- LEFT COLUMN -->
-      <div class="scale-left">
-
-        <!-- STAT -->
-        <div class="card stat big">
-          <div class="stat__kicker">Early childhood</div>
-          <div class="stat__value">1 in 5</div>
-          <div class="stat__label">
-            children of incarcerated parents in state prison are age 4 or younger.
-            <sup><a href="#fn2">2</a></sup>
+          <div class="estimate__row total">
+            <div class="estimate__label">Total people directly touched</div>
+            <div class="estimate__value" id="totalTouched">—</div>
           </div>
         </div>
 
-        <!-- CALLOUT -->
-        <div class="callout callout--indigo">
-          <p>
-            <strong>Why this is underrated:</strong>
-            Parenting and its effects are often framed as “individual failure,” but many breakdowns are predictable outcomes of systems that make repair and continuity hard.
-          </p>
+        <p class="estimate__note">
+          These are conservative “direct reach” numbers (not downstream effects like reduced recidivism).
+        </p>
+      </div>
+
+      <div class="card assumptions">
+        <h3>Assumptions (editable)</h3>
+
+        <div class="inputs">
+          <label class="input">
+            <span>Parents enrolled per cohort</span>
+            <input type="number" id="parentsPerCohort" value="24" min="0" />
+          </label>
+
+          <label class="input">
+            <span>Cohorts per year</span>
+            <input type="number" id="cohortsPerYear" value="10" min="0" />
+          </label>
+
+          <label class="input">
+            <span>Avg. family members reached per parent</span>
+            <input type="number" id="familyPerParent" value="2.0" step="0.1" min="0" />
+          </label>
         </div>
 
+        <p class="muted small">
+          “Family members reached” can be 1 child + 1 caregiver (2.0), or more if extended family participates.
+        </p>
       </div>
+    </div>
+
+    <div class="callout callout--indigo">
+      <strong>How to read this:</strong>
+      This estimate reflects the people who would be directly engaged through structured communication support
+      (calls, prompts, co-parenting tools, and relationship repair scaffolds). It scales linearly with cohorts.
+    </div>
+  </div>
+</section>
+
 
       <!-- RIGHT COLUMN — MAP -->
       <div class="card map">
