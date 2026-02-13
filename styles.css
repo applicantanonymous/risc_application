@@ -45,6 +45,7 @@ code{
   color: #1d2c6a;
 }
 
+
 .skip{
   position:absolute;
   top:-40px; left:10px;
@@ -64,7 +65,7 @@ code{
 /* TOPBAR */
 /* HEADER */
 .site-header {
-  padding: 14px 0;
+  padding: 10px 0;
   border-bottom: 1px solid #e6e8ec;
   background: white;
 }
