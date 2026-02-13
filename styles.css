@@ -328,6 +328,93 @@ h1::after{
   border: 1px solid rgba(255,159,46,.22);
 }
 
+.scale-estimate{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 900px){
+  .scale-estimate{ grid-template-columns: 1fr; }
+}
+
+.estimate h3,
+.assumptions h3{
+  margin: 0 0 .9rem;
+  font-size: 1.15rem;
+}
+
+.estimate__grid{
+  display:grid;
+  gap: .8rem;
+  margin-top: .25rem;
+}
+
+.estimate__row{
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .65rem .75rem;
+  border-radius: 14px;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+}
+
+.estimate__label{
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.estimate__value{
+  font-size: 1.45rem;
+  font-weight: 850;
+  letter-spacing: .01em;
+  color: var(--text);
+}
+
+.estimate__row.total{
+  background: rgba(47,92,255,.08);
+  border-color: rgba(47,92,255,.20);
+}
+
+.estimate__row.total .estimate__value{
+  color: var(--accent);
+  font-size: 1.65rem;
+}
+
+.estimate__note{
+  margin: .9rem 0 0;
+  color: var(--muted2);
+  line-height: 1.6;
+}
+
+.inputs{
+  display:grid;
+  gap: .75rem;
+}
+
+.input{
+  display:grid;
+  gap: .35rem;
+}
+
+.input span{
+  font-size: .92rem;
+  color: var(--muted2);
+  font-weight: 650;
+}
+
+.input input{
+  width: 100%;
+  padding: .6rem .7rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 1rem;
+}
+ 
 /* Friction */
 .friction{
   margin-top: 1rem;
