@@ -212,11 +212,8 @@ h1{
 .muted{ color: var(--muted2); }
 .small{ font-size:.92rem; }
 
-.hero__visual .figure img{
-  width:100%;
-  height:auto;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.12);
+.hero__grid {
+  display: block;
 }
 .figure__title{
   color: var(--muted);
