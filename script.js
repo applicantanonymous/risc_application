@@ -5,39 +5,53 @@ const ACTIVITIES = [
   {
     id: "prompted_call",
     title: "Guided call prompt",
-    desc: "Short-call friendly prompt to reduce misunderstandings and push toward repair.",
-    points: 8
+    desc: "Simple discussion prompts to help families use their time on the phone more intentionally.",
+    points: 10
   },
   {
     id: "coparenting_exercise",
-    title: "Co-parenting exercise",
-    desc: "Clarify roles + expectations with a caregiver (structured, not freeform).",
-    points: 12
+    title: "Co-parenting exercises",
+    desc: "A structured way to clarify roles, expectations, and support with a partner or fellow caregiver.",
+    points: 15
   },
   {
     id: "shared_journal",
     title: "Shared journaling (async)",
-    desc: "Asynchronous entries that can be read later (low bandwidth).",
-    points: 10
+    desc: "Short entries that can be written and read later, allowing connection without needing to coordinate schedules.",
+    points: 15
   },
   {
     id: "family_goal",
-    title: "Family goal-setting",
-    desc: "Define one small weekly goal + check-in plan.",
-    points: 9
+    title: "Goal-setting!",
+    desc: "Choose one small goal to focus on together and decide how to check in on it",
+    points: 10
   },
   {
     id: "structured_checkin",
-    title: "Structured check-in",
-    desc: "A brief check-in format for continuity (what happened, what’s next, what I need).",
-    points: 7
+    title: "Checking-in",
+    desc: "A brief format to stay updated for all members - what’s happened, what’s ahead, and what support is needed.",
+    points: 15
   },
   {
     id: "reflection_module",
     title: "Reflection module",
-    desc: "Short module focused on repair, regulation, or conflict de-escalation.",
-    points: 6
+    desc: "Watch short guided videos/exercises focused on repair, emotional regulation, and navigating conflict.",
+    points: 15
   }
+  {
+  id: "memory_match",
+  title: "Memory Match",
+  desc: "Take turns recalling a favorite shared memory and why it mattered",
+  points: 5
+}
+
+{
+  id: "word_game",
+  title: "Game Time",
+  desc: "Play any simple games your family can enjoy over call",
+  points: 5
+}
+
 ];
 
 // Thresholds are intentionally simple for a demo:
