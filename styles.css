@@ -62,49 +62,47 @@ code{
 }
 
 /* TOPBAR */
-.topbar{
-  position: sticky;
-  top:0;
-  z-index: 100;
-  background: rgba(246,247,251,.78);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
+/* HEADER */
+.site-header {
+  padding: 14px 0;
+  border-bottom: 1px solid #e6e8ec;
+  background: white;
 }
-.topbar__inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  padding: .9rem 0;
+
+/* puts brand + nav on one row */
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.brand__title{
-  font-size:.85rem;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  color: var(--muted);
+
+/* tighten brand */
+.brand__title {
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: .04em;
 }
-.brand__sub{
-  font-size:.85rem;
-  color: var(--muted2);
-  margin-top:.15rem;
+
+.brand__sub {
+  font-size: 12px;
+  color: #6b7280;
 }
-.nav{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.9rem;
+
+/* nav */
+.nav {
+  display: flex;
+  gap: 26px;
 }
-.nav a{
-  text-decoration:none;
-  font-size:.95rem;
-  padding:.35rem .55rem;
-  border-radius: 12px;
-  border:1px solid transparent;
-  color: var(--muted);
+
+.nav a {
+  text-decoration: none;
+  color: #374151;
+  font-weight: 500;
+  font-size: 14px;
 }
-.nav a:hover{
-  border-color: rgba(47,92,255,.22);
-  background: rgba(47,92,255,.08);
-  color: var(--text);
+
+.nav a:hover {
+  color: #111827;
 }
 
 /* HERO */
