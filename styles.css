@@ -604,3 +604,71 @@ h1::after{
 }
 
 
+/* SCALE section helpers (safe to add even if you already have card/grid styles) */
+.impact-dl{
+  margin: 18px 0 22px;
+  display: grid;
+  gap: 12px;
+}
+.impact-dl__row{
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 12px;
+}
+@media (max-width: 520px){
+  .impact-dl__row{ grid-template-columns: 1fr; }
+}
+.impact-dl dt{
+  color: var(--muted2);
+  font-weight: 700;
+}
+.impact-dl dd{
+  margin: 0;
+  color: var(--text);
+  line-height: 1.65;
+}
+
+/* Small kicker above the big stat */
+.stat__kicker{
+  color: var(--muted2);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* Vera embed styling */
+.map-embed{
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--panel2);
+  aspect-ratio: 16 / 11;
+  min-height: 320px;
+}
+.map-embed iframe{
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* Callout variant (different colour) */
+.callout--indigo{
+  background: rgba(47, 92, 255, 0.08);
+  border: 1px solid rgba(47, 92, 255, 0.22);
+}
+.callout__strong{
+  margin-top: 12px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+/* Link style used above */
+.ext{
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+}
+.ext:hover{ text-decoration: underline; }
+
+
