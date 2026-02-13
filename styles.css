@@ -149,6 +149,28 @@ h1::after{
   font-size:1.05rem;
 }
 
+/* Synthesis callout box (different color) */
+.synthesis-box{
+  margin-top: 24px;
+  padding: 22px 26px;
+  border-radius: 18px;
+
+  /* different color from your other cards */
+  background: rgba(19, 185, 129, 0.10);  /* uses your --accent3 tone */
+  border: 1px solid rgba(19, 185, 129, 0.28);
+
+  color: var(--text);
+  box-shadow: 0 10px 26px rgba(17,19,24,.06);
+}
+
+.synthesis-box p{
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+
 /* Motivation paragraph: wider but readable */
 .lede{
   margin: 1.25rem 0 0;
