@@ -719,4 +719,8 @@ h1::after{
 }
 .ext:hover{ text-decoration: underline; }
 
+.refs li{
+  scroll-margin-top:120px;
+}
+
 
