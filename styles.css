@@ -391,6 +391,42 @@ h1::after{
   color: var(--muted);
 }
 
+.map-link{
+  display:block;
+  margin-top:16px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  background:var(--panel2);
+  text-decoration:none;
+  color:inherit;
+}
+
+.map-link__preview{
+  height:360px;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,.04) 0px,
+      rgba(0,0,0,.04) 8px,
+      rgba(0,0,0,.02) 8px,
+      rgba(0,0,0,.02) 16px
+    );
+}
+
+.map-link__text{
+  padding:16px 18px;
+  display:grid;
+  gap:6px;
+}
+
+.map-link:hover{
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+
 /* Map placeholder */
 .map__placeholder{
   margin-top:.75rem;
