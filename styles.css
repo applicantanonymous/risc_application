@@ -524,10 +524,9 @@ h1::after{
 
 
 /* ---------------- HERO LAYOUT ---------------- */
-
-.hero {
+.hero{
   padding-top: 32px;
-  padding-bottom: 64px;
+  padding-bottom: 32px; /* was 64px */
 }
 
 .hero__layout {
