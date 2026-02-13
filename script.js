@@ -13,22 +13,10 @@ window.addEventListener("DOMContentLoaded", () => {
       points: 10
     },
     {
-      id: "coparenting_exercise",
-      title: "Co-parenting exercises",
-      desc: "A structured way to clarify roles, expectations, and support with a partner or fellow caregiver.",
-      points: 15
-    },
-    {
       id: "shared_journal",
       title: "Shared journaling (async)",
       desc: "Short entries that can be written and read later, allowing connection without needing to coordinate schedules.",
       points: 15
-    },
-    {
-      id: "family_goal",
-      title: "Goal-setting",
-      desc: "Choose one small goal to focus on together and decide how to check in on it.",
-      points: 10
     },
     {
       id: "structured_checkin",
