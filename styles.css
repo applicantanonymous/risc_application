@@ -603,7 +603,18 @@ h1::after{
   }
 }
 
+.scale-layout{
+  display:grid;
+  grid-template-columns: 420px 1fr; 
+  gap:32px;
+  align-items:stretch; /* makes heights match */
+}
 
+.scale-left{
+  display:grid;
+  gap:24px;
+}
+ 
 /* SCALE section helpers (safe to add even if you already have card/grid styles) */
 .impact-dl{
   margin: 18px 0 22px;
