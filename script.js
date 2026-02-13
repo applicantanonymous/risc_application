@@ -1,421 +1,181 @@
-:root{
-  --bg:#0b0c10;
-  --panel:#11131a;
-  --panel2:#0f1117;
-  --text:#f4f6fb;
-  --muted:#b7bfd3;
-  --muted2:#8f97aa;
-  --border:rgba(255,255,255,.10);
-  --shadow: 0 10px 30px rgba(0,0,0,.35);
-  --radius: 18px;
-  --radius2: 24px;
-  --max: 1100px;
+// Relational Credit Economy — simple, auditable prototype logic
+// (Keeps it transparent and easy to explain on the page.)
+
+const ACTIVITIES = [
+  {
+    id: "prompted_call",
+    title: "Guided call prompt",
+    desc: "Short-call friendly prompt to reduce misunderstandings and push toward repair.",
+    points: 8
+  },
+  {
+    id: "coparenting_exercise",
+    title: "Co-parenting exercise",
+    desc: "Clarify roles + expectations with a caregiver (structured, not freeform).",
+    points: 12
+  },
+  {
+    id: "shared_journal",
+    title: "Shared journaling (async)",
+    desc: "Asynchronous entries that can be read later (low bandwidth).",
+    points: 10
+  },
+  {
+    id: "family_goal",
+    title: "Family goal-setting",
+    desc: "Define one small weekly goal + check-in plan.",
+    points: 9
+  },
+  {
+    id: "structured_checkin",
+    title: "Structured check-in",
+    desc: "A brief check-in format for continuity (what happened, what’s next, what I need).",
+    points: 7
+  },
+  {
+    id: "reflection_module",
+    title: "Reflection module",
+    desc: "Short module focused on repair, regulation, or conflict de-escalation.",
+    points: 6
+  }
+];
+
+// Thresholds are intentionally simple for a demo:
+const UNLOCKS = [
+  { at: 15, label: "Unlock: +5 call minutes/week" },
+  { at: 30, label: "Unlock: extended messaging access" },
+  { at: 45, label: "Unlock: +1 video visit/month (where available)" },
+  { at: 60, label: "Unlock: greater scheduling flexibility" }
+];
+
+const els = {
+  activityList: document.getElementById("activityList"),
+  totalCredits: document.getElementById("totalCredits"),
+  progressFill: document.getElementById("progressFill"),
+  progressText: document.getElementById("progressText"),
+  unlocksList: document.getElementById("unlocksList"),
+  loadExample: document.getElementById("loadExample"),
+  resetAll: document.getElementById("resetAll")
+};
+
+function renderActivities() {
+  els.activityList.innerHTML = "";
+
+  ACTIVITIES.forEach(a => {
+    const row = document.createElement("label");
+    row.className = "item";
+    row.setAttribute("for", a.id);
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = a.id;
+    checkbox.dataset.points = String(a.points);
+    checkbox.addEventListener("change", updateSimulator);
+
+    const meta = document.createElement("div");
+    meta.className = "item__meta";
+
+    const title = document.createElement("div");
+    title.className = "item__title";
+    title.textContent = a.title;
+
+    const desc = document.createElement("div");
+    desc.className = "item__desc";
+    desc.textContent = a.desc;
+
+    const pts = document.createElement("div");
+    pts.className = "item__pts";
+    pts.textContent = `${a.points} credits`;
+
+    meta.appendChild(title);
+    meta.appendChild(desc);
+    meta.appendChild(pts);
+
+    row.appendChild(checkbox);
+    row.appendChild(meta);
+
+    els.activityList.appendChild(row);
+  });
 }
 
-*{ box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
-body{
-  margin:0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-  background: radial-gradient(900px 500px at 20% 0%, rgba(93,150,255,.18), transparent 55%),
-              radial-gradient(800px 450px at 90% 20%, rgba(255,173,72,.14), transparent 55%),
-              var(--bg);
-  color:var(--text);
-  line-height:1.55;
+function getTotalCredits() {
+  const inputs = els.activityList.querySelectorAll("input[type='checkbox']");
+  let total = 0;
+  inputs.forEach(i => {
+    if (i.checked) total += Number(i.dataset.points || 0);
+  });
+  return total;
 }
 
-a{ color:inherit; }
-code{
-  background: rgba(255,255,255,.06);
-  padding: .1rem .35rem;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,.08);
+function getUnlocked(total) {
+  return UNLOCKS.filter(u => total >= u.at);
 }
 
-.skip{
-  position:absolute;
-  top:-40px; left:10px;
-  background:var(--text);
-  color:#000;
-  padding:.5rem .75rem;
-  border-radius:10px;
-  z-index:999;
-}
-.skip:focus{ top:10px; }
-
-.container{
-  width: min(var(--max), calc(100% - 2rem));
-  margin: 0 auto;
+function nextThreshold(total) {
+  for (const u of UNLOCKS) {
+    if (total < u.at) return u.at;
+  }
+  return null; // maxed out
 }
 
-.topbar{
-  position: sticky;
-  top:0;
-  z-index: 100;
-  background: rgba(11,12,16,.7);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
-}
-.topbar__inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  padding: .9rem 0;
-}
-.brand__title{
-  font-size:.85rem;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  color: var(--muted);
-}
-.brand__sub{
-  font-size:.85rem;
-  color: var(--muted2);
-  margin-top:.15rem;
-}
-.nav{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.9rem;
-}
-.nav a{
-  text-decoration:none;
-  font-size:.95rem;
-  padding:.35rem .55rem;
-  border-radius: 12px;
-  border:1px solid transparent;
-  color: var(--muted);
-}
-.nav a:hover{
-  border-color: rgba(255,255,255,.16);
-  color: var(--text);
+function updateSimulator() {
+  const total = getTotalCredits();
+  els.totalCredits.textContent = String(total);
+
+  const unlocked = getUnlocked(total);
+
+  // Unlock list
+  els.unlocksList.innerHTML = "";
+  if (unlocked.length === 0) {
+    const li = document.createElement("li");
+    li.className = "muted";
+    li.textContent = "None yet.";
+    els.unlocksList.appendChild(li);
+  } else {
+    unlocked.forEach(u => {
+      const li = document.createElement("li");
+      li.textContent = u.label;
+      els.unlocksList.appendChild(li);
+    });
+  }
+
+  // Progress bar
+  const next = nextThreshold(total);
+  if (next === null) {
+    els.progressFill.style.width = "100%";
+    els.progressText.textContent = "Max tier reached — all prototype unlocks available.";
+    return;
+  }
+
+  const prev = unlocked.length === 0 ? 0 : unlocked[unlocked.length - 1].at;
+  const span = next - prev;
+  const into = total - prev;
+  const pct = Math.max(0, Math.min(100, (into / span) * 100));
+
+  els.progressFill.style.width = `${pct}%`;
+  els.progressText.textContent = `Next unlock at ${next} credits. (${into}/${span} in this tier)`;
 }
 
-.hero{
-  padding: 3.2rem 0 2rem;
-}
-.hero__grid{
-  display:grid;
-  gap: 1.25rem;
-  grid-template-columns: 1.05fr .95fr;
-  align-items:start;
-}
-@media (max-width: 960px){
-  .hero__grid{ grid-template-columns: 1fr; }
+function setChecks(ids) {
+  const inputs = els.activityList.querySelectorAll("input[type='checkbox']");
+  inputs.forEach(i => {
+    i.checked = ids.includes(i.id);
+  });
+  updateSimulator();
 }
 
-.kicker{
-  margin:0 0 .25rem;
-  color: var(--muted);
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  font-size:.9rem;
-}
-h1{
-  margin:.2rem 0 .65rem;
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height:1.12;
-}
-.hook{
-  margin:0 0 1rem;
-  color: var(--muted);
-  font-size:1.05rem;
-}
-.lede{
-  margin: 1rem 0 0;
-  color: var(--text);
-  font-size:1.05rem;
+function reset() {
+  setChecks([]);
 }
 
-.section{
-  padding: 2.25rem 0;
-}
-.section h2{
-  margin:0 0 .75rem;
-  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
-}
-.section__lede{
-  margin:0 0 1.25rem;
-  color: var(--muted);
-  max-width: 70ch;
+function loadExample() {
+  // Example is intentionally plausible + not “maxed out”
+  setChecks(["prompted_call", "structured_checkin", "shared_journal", "family_goal"]);
 }
 
-.card{
-  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-  border: 1px solid var(--border);
-  border-radius: var(--radius2);
-  padding: 1.1rem 1.1rem;
-  box-shadow: var(--shadow);
-}
+renderActivities();
+updateSimulator();
 
-.hero__cards{
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: .85rem;
-  margin: 1rem 0 1rem;
-}
-@media (max-width: 700px){
-  .hero__cards{ grid-template-columns: 1fr; }
-}
-
-.stat{
-  padding: .95rem 1rem;
-}
-.stat__value{
-  font-size: 1.9rem;
-  font-weight: 750;
-  letter-spacing: .01em;
-}
-.stat__label{
-  color: var(--muted);
-  margin-top:.2rem;
-  font-size:.95rem;
-}
-.stat.big .stat__value{ font-size: 2.2rem; }
-
-.grid-2{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-@media (max-width: 900px){
-  .grid-2{ grid-template-columns: 1fr; }
-}
-
-.grid-3{
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-@media (max-width: 900px){
-  .grid-3{ grid-template-columns: 1fr; }
-}
-
-.bullets{
-  margin:.6rem 0 0;
-  padding-left: 1.1rem;
-  color: var(--muted);
-}
-.bullets li{ margin:.35rem 0; }
-
-.callout{
-  margin-top: 1.1rem;
-  padding: 1rem 1.05rem;
-  border-radius: var(--radius);
-  border: 1px solid rgba(255,255,255,.16);
-  background: rgba(255,255,255,.05);
-  color: var(--text);
-}
-
-.muted{ color: var(--muted2); }
-.small{ font-size:.92rem; }
-
-.hero__visual .figure img{
-  width:100%;
-  height:auto;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.12);
-}
-.figure__title{
-  color: var(--muted);
-  font-size:.95rem;
-  margin-bottom:.7rem;
-}
-.figure__caption{
-  margin-top:.6rem;
-  color: var(--muted2);
-  font-size:.9rem;
-}
-
-.mini-quote{
-  margin-top: .85rem;
-  padding: .85rem .95rem;
-  border-radius: 16px;
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.10);
-}
-
-.friction{
-  margin-top: 1rem;
-}
-.friction__row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:.75rem;
-  flex-wrap:wrap;
-  margin-top:.5rem;
-}
-.pill{
-  flex: 1 1 220px;
-  padding: .8rem .9rem;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.04);
-  text-align:center;
-}
-.pill span{
-  display:block;
-  margin-top:.25rem;
-  color: var(--muted2);
-  font-size:.9rem;
-}
-.arrow{
-  color: var(--muted);
-  font-size: 1.2rem;
-  padding: 0 .25rem;
-}
-.friction__notes{
-  display:flex;
-  gap:.75rem;
-  flex-wrap:wrap;
-  margin-top: .75rem;
-}
-.note{
-  flex: 1 1 260px;
-  padding: .75rem .85rem;
-  border-radius: 16px;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.10);
-  color: var(--muted);
-}
-
-.map__placeholder{
-  margin-top:.75rem;
-  height: 260px;
-  border-radius: 18px;
-  border: 1px dashed rgba(255,255,255,.18);
-  background: rgba(255,255,255,.03);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color: var(--muted);
-}
-.map__anchor{
-  margin:.85rem 0 0;
-  color: var(--muted);
-}
-
-.sim__header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:.75rem;
-}
-.sim__buttons{ display:flex; gap:.5rem; flex-wrap:wrap; }
-
-.btn{
-  border: 1px solid rgba(255,255,255,.16);
-  background: rgba(255,255,255,.06);
-  color: var(--text);
-  border-radius: 14px;
-  padding: .5rem .75rem;
-  cursor:pointer;
-}
-.btn:hover{ background: rgba(255,255,255,.10); }
-.btn--ghost{
-  background: transparent;
-}
-
-.checklist{
-  margin-top:.85rem;
-  display:flex;
-  flex-direction:column;
-  gap:.6rem;
-}
-.item{
-  display:flex;
-  align-items:flex-start;
-  gap:.7rem;
-  padding:.7rem .75rem;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.03);
-}
-.item input{ transform: translateY(2px); }
-.item__meta{
-  display:flex;
-  flex-direction:column;
-  gap:.15rem;
-}
-.item__title{ font-weight:650; }
-.item__desc{ color: var(--muted2); font-size:.92rem; }
-.item__pts{ color: var(--muted); font-size:.92rem; margin-top:.15rem; }
-
-.meter{
-  display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  gap:1rem;
-  margin-top:.5rem;
-}
-.meter__label{ color: var(--muted); }
-.meter__value{
-  font-size: 2.2rem;
-  font-weight: 750;
-}
-
-.progress{ margin-top: 1rem; }
-.progress__label{ color: var(--muted); margin-bottom:.4rem; }
-.progress__bar{
-  width:100%;
-  height: 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.04);
-  overflow:hidden;
-}
-.progress__fill{
-  height:100%;
-  background: rgba(140,180,255,.65);
-  width:0%;
-}
-.progress__text{ margin-top:.45rem; color: var(--muted2); }
-
-.unlocks{ margin-top: 1rem; }
-.unlocks__label{ color: var(--muted); margin-bottom:.35rem; }
-.unlocks__list{
-  margin:.25rem 0 0;
-  padding-left: 1.1rem;
-  color: var(--muted);
-}
-
-.refs{
-  margin: .75rem 0 0;
-  padding-left: 1.25rem;
-  color: var(--text);
-}
-.refs li{
-  margin: .9rem 0;
-}
-.ref__meta{
-  margin-top:.35rem;
-  color: var(--muted2);
-  font-size:.92rem;
-}
-.ref__src{ color: var(--muted); }
-
-.footer{
-  padding: 1.5rem 0 2.5rem;
-  border-top: 1px solid var(--border);
-  margin-top: 1.5rem;
-}
-.footer__inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  flex-wrap:wrap;
-}
-.top{
-  text-decoration:none;
-  padding:.35rem .55rem;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.12);
-  color: var(--muted);
-}
-.top:hover{ color: var(--text); border-color: rgba(255,255,255,.20); }
+els.resetAll?.addEventListener("click", reset);
+els.loadExample?.addEventListener("click", loadExample);
 
