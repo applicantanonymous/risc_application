@@ -233,54 +233,54 @@
     </section>
 
     <!-- SIMULATOR -->
-    <section class="section" id="simulator">
-      <div class="container">
-        <h2>Interactive simulator</h2>
-        <p class="section__lede">
-          Prototype simulator: select engagement activities and see how relational effort translates into expanded access.
-          (logic: credits unlock privileges at thresholds.)
-        </p>
+<section class="section" id="simulator">
+  <div class="container">
+    <h2>Interactive simulator</h2>
+    <p class="section__lede">
+      Prototype simulator: select engagement activities and see how relational effort translates into expanded access.
+      (logic: credits unlock privileges at thresholds.)
+    </p>
 
-        <div class="grid-2">
-          <div class="card">
-            <div class="sim__header">
-              <h3>Engagement activities</h3>
-              <div class="sim__buttons">
-                <button class="btn" id="loadExample">Load example</button>
-                <button class="btn btn--ghost" id="resetAll">Reset</button>
-              </div>
-            </div>
-
-            <div class="checklist" id="activityList" aria-label="Engagement activity checklist"></div>
-          </div>
-
-          <div class="card">
-            <h3>Credits & unlocks</h3>
-
-            <div class="meter">
-              <div class="meter__label">TOTAL CREDITS</div>
-              <div class="meter__value" id="totalCredits">0</div>
-            </div>
-
-            <div class="progress">
-              <div class="progress__label">PROGRESS TO NEXT UNLOCK</div>
-              <div class="progress__bar">
-                <div class="progress__fill" id="progressFill" style="width: 0%"></div>
-              </div>
-              <div class="progress__text" id="progressText">No unlocks yet — select activities to earn credits.</div>
-            </div>
-
-            <div class="unlocks">
-              <div class="unlocks__label">UNLOCKED PRIVILEGES</div>
-              <ul class="unlocks__list" id="unlocksList">
-                <li class="muted">None yet.</li>
-              </ul>
-            </div>
-
+    <div class="grid-2">
+      <div class="card">
+        <div class="sim__header">
+          <h3>Engagement activities</h3>
+          <div class="sim__buttons">
+            <button class="btn" id="loadExample" type="button">Load example</button>
+            <button class="btn btn--ghost" id="resetAll" type="button">Reset</button>
           </div>
         </div>
+
+        <div class="checklist" id="activityList" aria-label="Engagement activity checklist"></div>
       </div>
-    </section>
+
+      <div class="card">
+        <h3>Credits & unlocks</h3>
+
+        <div class="meter">
+          <div class="meter__label">TOTAL CREDITS</div>
+          <div class="meter__value" id="totalCredits">0</div>
+        </div>
+
+        <div class="progress">
+          <div class="progress__label">PROGRESS TO NEXT UNLOCK</div>
+          <div class="progress__bar">
+            <div class="progress__fill" id="progressFill" style="width: 0%"></div>
+          </div>
+          <div class="progress__text" id="progressText">No unlocks yet. Select activities to earn credits.</div>
+        </div>
+
+        <div class="unlocks">
+          <div class="unlocks__label">UNLOCKED PRIVILEGES</div>
+          <ul class="unlocks__list" id="unlocksList">
+            <li class="muted">None yet.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <!-- ETHICS -->
     <section class="section" id="ethics">
