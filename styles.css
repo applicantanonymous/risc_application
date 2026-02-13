@@ -521,3 +521,49 @@ h1::after{
   background: rgba(47,92,255,.10);
 }
 
+
+/* ---------------- HERO LAYOUT ---------------- */
+
+.hero {
+  padding-top: 32px;
+  padding-bottom: 64px;
+}
+
+.hero__layout {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* prevents text from becoming too wide */
+.hero__main {
+  max-width: 720px;
+}
+
+/* right column */
+.hero__aside {
+  position: sticky;
+  top: 120px;   /* cards float slightly while scrolling */
+}
+
+/* stack cards vertically */
+.hero__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* MOBILE */
+@media (max-width: 1000px) {
+  .hero__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__aside {
+    position: relative;
+    top: 0;
+  }
+}
+
+
