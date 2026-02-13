@@ -327,6 +327,8 @@ h1::after{
   position: relative;
 }
 
+
+
 /* small colored underline inside pills */
 .pill::after{
   content:"";
@@ -385,6 +387,19 @@ h1::after{
   color: var(--muted);
 }
 
+.container-narrow{
+  width: min(760px, calc(100% - 2rem));
+  margin: 0 auto;
+} 
+.motivation-band{
+  padding-top: 5rem;
+  padding-bottom: 2rem;
+}
+.motivation{
+  font-size: 1.1rem;
+  line-height: 1.9;
+  margin: 0;
+}
 /* Buttons */
 .sim__header{
   display:flex;
