@@ -734,11 +734,26 @@ h1::after{
 
 /* PRINT-ONLY PAGE BREAKS */
 @media print {
-
   .page-break {
-    break-before: page;        /* modern browsers */
-    page-break-before: always; /* fallback */
+    break-before: page;
+    page-break-before: always;
   }
 
+  /* ✅ prevent a blank first page */
+  .page-break:first-child,
+  body > .page-break:first-of-type,
+  main > .page-break:first-of-type,
+  .section.page-break:first-of-type {
+    break-before: auto !important;
+    page-break-before: auto !important;
+  }
+@media print {
+  body {
+    background: #fff !important;
+  }
+  .card {
+    box-shadow: none !important;
+  }
+}
 }
 
