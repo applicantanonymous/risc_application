@@ -723,6 +723,12 @@ h1::after{
   scroll-margin-top:120px;
 }
 
+.references li{
+  margin-bottom: 0.9rem;
+  padding-left: 1.4rem;
+  text-indent: -1.4rem;
+}
+
 /* PRINT-ONLY PAGE BREAKS */
 @media print {
 
