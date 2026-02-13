@@ -723,4 +723,13 @@ h1::after{
   scroll-margin-top:120px;
 }
 
+/* PRINT-ONLY PAGE BREAKS */
+@media print {
+
+  .page-break {
+    break-before: page;        /* modern browsers */
+    page-break-before: always; /* fallback */
+  }
+
+}
 
