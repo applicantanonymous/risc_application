@@ -740,3 +740,59 @@ h1::after{
 }
 
 
+/* PRINT: fix tiny text + make sections feel full-width */
+@media print {
+  /* Always print colors properly */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* Margins and page */
+  @page { margin: 0.55in 0.45in; }
+
+  /* Increase overall print type size */
+  html, body {
+    margin: 0 !important;
+    font-size: 16px !important;      /* <- main fix for tiny print */
+    line-height: 1.45 !important;
+    background: #f6f7fb !important;  /* keep your light blue */
+  }
+
+  /* Make content use the printable width */
+  .container{
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 0.15in !important;
+    padding-right: 0.15in !important;
+  }
+
+  /* Headings: bump up so hierarchy looks right on paper */
+  h1{ font-size: 30px !important; line-height: 1.1 !important; }
+  h2{ font-size: 20px !important; margin-top: 0.35in !important; }
+  h3{ font-size: 16.5px !important; }
+
+  /* Body copy */
+  p, li{
+    font-size: 15.5px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* “Muted” text often prints way too small */
+  .muted, .section__lede, .stat__label{
+    font-size: 14.5px !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Motivation block: make it read like a “brief” */
+  #problem p, #scale p, #solution p, #sources li,
+  #problem .notes, #problem .takeaway,
+  #top p {
+    max-width: 95ch;           /* wider text measure for print */
+  }
+
+  /* Cards: keep clean in print */
+  .card{
+    background: #fff !important;
+    box-shadow: none !important;
+    border: 1px solid rgba(17,19,24,.12) !important;
+  }
+}
+
