@@ -661,39 +661,47 @@ h1::after{
   padding-bottom: 0 !important;
 }
 
+/* Hide page breaks on screen */
+.page-break {
+  display: none;
+}
+
 @media print {
-  /* Don’t print shadows anywhere */
+
+  /* Page margin only */
+  @page {
+    margin: 0.75in;
+  }
+
+  /* Remove background gradients */
+  body {
+    background: #fff !important;
+  }
+
+  /* Remove all shadows (cards + buttons) */
   * {
     box-shadow: none !important;
     text-shadow: none !important;
-    filter: none !important;
   }
 
-  /* Avoid breaking inside your cards/sections */
-  .card, .section {
+  /* Disable sticky behavior for print */
+  .hero__aside {
+    position: static !important;
+  }
+
+  /* Show page breaks only in print */
+  .page-break {
+    display: block !important;
+    break-before: page;
+    page-break-before: always;
+  }
+
+  /* Prevent cards from splitting awkwardly */
+  .card,
+  .callout,
+  .section {
     break-inside: avoid;
     page-break-inside: avoid;
-  }
-
-  /* Tighten print spacing so it fits */
-  body {
-    background: white !important;
-  }
-
-  .section {
-    padding-top: 14px !important;
-    padding-bottom: 14px !important;
-  }
-
-  /* Optional: slightly smaller text for fit */
-  html, body {
-    font-size: 12.5px !important;
-    line-height: 1.45 !important;
-  }
-
-  /* Optional: reduce page margins */
-  @page {
-    margin: 0.6in;
   }
 }
 
