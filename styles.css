@@ -862,9 +862,9 @@ h1::after{
 
 @media print {
 
-  /* Hide everything except motivation */
+  /* DO NOT Hide everything except motivation */
   body * {
-    visibility: hidden;
+    visibility: visible;
   }
 
   #motivation,
