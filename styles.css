@@ -835,12 +835,20 @@ h1::after{
     page-break-before: auto !important;
   }
 @media print {
-  body {
-    background: #fff !important;
-  }
-  .card {
-    box-shadow: none !important;
-  }
-}
-}
 
+  body {
+    background: #f6f7fb !important;   /* your light blue */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .section {
+    background: #ffffff; /* keep panels white if you want contrast */
+  }
+
+  .card {
+    box-shadow: none; /* optional: cleaner print */
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+
+}
