@@ -173,6 +173,11 @@ h1::after{
   font-weight: 500;
 }
 
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;   /* increase this */
+}
 
 /* Motivation paragraph: wider but readable */
 .lede{
