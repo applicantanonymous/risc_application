@@ -862,38 +862,18 @@ h1::after{
 
 @media print {
 
-  /* DO NOT Hide everything except motivation */
-  body * {
-    visibility: visible;
-  }
-
-  #motivation,
-  #motivation * {
-    visibility: visible;
-  }
-
   #motivation {
-    position: absolute;
-    inset: 0;
-
+    height: 100vh;
     display: flex;
-    align-items: center;       /* vertical center */
-    justify-content: center;   /* horizontal center */
-
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 0 15%;
-
     page-break-after: always;
   }
 
   .motivation-text {
     font-size: 32px;
-    line-height: 1.4;
-    font-weight: 500;
   }
 
-  h2 {
-    font-size: 48px;
-    margin-bottom: 40px;
-  }
 }
+
