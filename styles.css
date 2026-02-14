@@ -632,49 +632,127 @@ h1::after{
 }
 
 /* =========================
-   PRINT
+   PRINT – LANDSCAPE PDF MODE
+   Compact but prints everything
 ========================= */
 
-.page-break{ display:none; }
+@page {
+  size: landscape;
+  margin: 0.4in;
+}
 
-@media print{
-  body{
-    background:#fff;
+@media print {
+
+  /* Reset background + effects */
+  body {
+    background: #ffffff !important;
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+    color: #000 !important;
   }
 
+  /* Remove sticky elements */
   .site-header,
-  .hero__aside{
-    display:none;
+  .hero__aside,
+  .footer,
+  .top {
+    display: none !important;
   }
 
-  .page-break{
-    display:block;
-    break-before: page;
+  /* Remove decorative shadows */
+  .card {
+    box-shadow: none !important;
   }
 
-  .section{
+  /* Tighter vertical spacing */
+  .hero,
+  .section {
+    padding: 0.6rem 0 !important;
+  }
+
+  .section__lede {
+    margin-bottom: 0.6rem !important;
+  }
+
+  h1 {
+    font-size: 24px !important;
+    margin: 0 0 0.4rem !important;
+  }
+
+  h1::after {
+    margin-top: 0.4rem !important;
+    height: 3px !important;
+  }
+
+  .section h2 {
+    font-size: 17px !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  .section h2::after {
+    margin-top: 0.3rem !important;
+    height: 2px !important;
+  }
+
+  p {
+    margin: 0.4rem 0 !important;
+  }
+
+  /* Compress cards */
+  .card {
+    padding: 0.75rem !important;
+  }
+
+  /* Reduce grid spacing */
+  .grid-2,
+  .grid-3,
+  .scale-estimate {
+    gap: 0.6rem !important;
+  }
+
+  /* Simulator compression */
+  #simulator .activityRow {
+    padding: 0.5rem 0.6rem !important;
+  }
+
+  #simulator .checklist {
+    gap: 0.35rem !important;
+  }
+
+  #simulator .meter,
+  #simulator .progress,
+  #simulator .unlocks {
+    padding: 0.6rem 0.7rem !important;
+  }
+
+  /* Inputs smaller */
+  input {
+    padding: 0.4rem 0.5rem !important;
+  }
+
+  /* Remove page overflow splitting */
+  .section,
+  .hero {
     break-inside: avoid;
+    page-break-inside: avoid;
   }
 
+  /* Each section starts on new page */
+  .hero,
   #motivation,
   #problem,
   #solution,
   #simulator,
   #scale,
   #ethics,
-  #references{
+  #references {
     break-before: page;
+    page-break-before: always;
   }
-}
 
-@media print {
+  /* Remove manual page break elements */
   .page-break {
-    break-before: page;
-    page-break-before: always; /* fallback for older browsers */
+    display: none !important;
   }
+
 }
-
-
-
-
-
