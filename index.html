@@ -7,7 +7,6 @@
   <title>Risc Analyst Application</title>
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Optional but recommended for your new typography system -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Serif:wght@400;500;600&display=swap" rel="stylesheet">
@@ -18,10 +17,8 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <!-- HEADER / NAV -->
   <header class="site-header" aria-label="Site header">
     <div class="container header__inner">
-
       <div class="brand">
         <div class="brand__title">RISC Application · Prompt 4</div>
         <div class="brand__sub">Anonymized prototype</div>
@@ -35,130 +32,117 @@
         <a href="#ethics">Ethics</a>
         <a href="#references">References</a>
       </nav>
-
     </div>
   </header>
 
   <main id="main">
-    <!-- HERO -->
     <section class="hero">
       <div class="container hero__layout">
-
-        <!-- LEFT COLUMN -->
         <div class="hero__main">
-
           <p class="kicker">
             What is the most underrated social issue of our time? How would you address it?
           </p>
 
           <h1>
-            Improving familial connections for those impacted by incarceration.
+            Sustaining family connection during incarceration.
           </h1>
 
           <div class="callout">
             <p>
-              When an individual is incarcerated, a sustained family connection becomes expensive,
-              fragile, and hard to repair after conflict. That breakdown does more than just strain relationships during incarceration; it destabilizes caregiving,
-              harms children’s emotional security, and leaves people returning home with fewer stabilizing ties.
+              In many facilities, communication is costly and unreliable. When contact drops, families lose continuity and reentry begins with fewer stable ties.
             </p>
             <p class="muted" style="margin-top:.75rem;">
-              This project focuses on incarcerated parents/caregivers and their family members on the outside. Through this proposed product, I hope to support the many children whose parents are incarcerated, reduce recidivism, and make familial connections stronger through reentry, without policing each family's unique culture.
+              This proposed product supports incarcerated parents and caregivers and the people supporting children at home. It expands access to connection without monitoring family content or imposing a single model of parenting.
             </p>
           </div>
-
         </div>
 
-        <!-- RIGHT COLUMN -->
-        <!-- RIGHT COLUMN --> <aside class="hero__aside"> <div class="hero__cards" role="list"> <div class="card stat" role="listitem"> <div class="stat__value">~2M</div> <div class="stat__label"> people are confined on any given day in the U.S. as of 2025. </div> </div> <div class="card stat" role="listitem"> <div class="stat__value">47%</div> <div class="stat__label"> of people in U.S. state prisons are parents of minor children. </div> </div> <div class="card stat" role="listitem"> <div class="stat__value">5.2M+</div> <div class="stat__label"> children in the U.S., as of 2021, have experienced parental incarceration. </div> </div> </div> </aside>
+        <aside class="hero__aside">
+          <div class="hero__cards" role="list">
+            <div class="card stat" role="listitem">
+              <div class="stat__value">~2M</div>
+              <div class="stat__label">people are confined on any given day in the U.S. as of 2025.</div>
+            </div>
+            <div class="card stat" role="listitem">
+              <div class="stat__value">47%</div>
+              <div class="stat__label">of people in U.S. state prisons are parents of minor children.</div>
+            </div>
+            <div class="card stat" role="listitem">
+              <div class="stat__value">5.2M+</div>
+              <div class="stat__label">children in the U.S., as of 2021, have experienced parental incarceration.</div>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
 
     <div class="page-break"></div>
 
-    <!-- MOTIVATION -->
     <section class="section motivation-print" id="motivation">
       <div class="container">
         <h2>Motivation</h2>
 
         <p class="motivation-text">
-          Once a week, I facilitate a parenting program inside Cook County Jail at 3015 S. California Blvd.
-          The people I work with speak fondly of their children and consistently express a strong desire to be good parents, all while navigating the
-          constraints of incarceration.
+          Once a week, I facilitate a parenting program inside Cook County Jail at 3015 S. California Blvd. The people I work with talk about their children with real care and a steady desire to show up as parents.
         </p>
 
         <p class="motivation-text" style="margin-top:1rem;">
-          However, over time, I've noticed the same frictions coming up again and again. To name a few - co-parenting conflict that escalates without repair,
-          calls that become the only touchpoint and then break after one argument, distrust of a program language that feels culturally agnostic,
-          and (most structurally) how hard it is to practice any skills consistently when contact with anyone from the outside is scarce.
+          Over time, the same barriers come up in different forms. Conflict with a co-parent escalates without any path to repair. One argument can end the only consistent point of contact. Program language can feel disconnected from how families describe parenting in their own communities.
         </p>
 
         <p class="motivation-text" style="margin-top:1rem;">
-          This motivated me to think about what it takes to design a parenting intervention that actually works under carceral constraints. 
-          Where communication and access are limited, emotional bandwidth is low, and stress is ever-prevalent. 
+          I began thinking less about motivation and more about design. What would support look like if it matched the constraints people actually face while incarcerated?
         </p>
       </div>
     </section>
 
     <div class="page-break"></div>
 
-    <!-- PROBLEM -->
     <section class="section" id="problem">
       <div class="container">
         <h2>The Problem</h2>
 
         <p class="section__lede">
-          In most U.S. carceral institutions, family communication is treated like a scarce privilege. It is expensive, vaguely scheduled,
-          and easy to lose after conflict.
+          In many U.S. facilities, family communication functions as a restricted privilege. It is expensive, poorly timed, and easy to lose after conflict.
         </p>
 
         <div class="grid-2">
-          <!-- Card 1 -->
           <div class="card">
             <h3>Notes from inside jail</h3>
 
             <p>
-              In sessions, conversations about parenting quickly become conversations about relationships: conflict with partners, uncertainty
-              about authority at home, feeling excluded from family decisions, and fear that children will grow emotionally distant.
-              Several fathers described arguments that led caregivers to stop answering the phone — sometimes for weeks.
+              In sessions, parenting discussions often shift toward relationship strain. People describe conflict with partners, uncertainty about their role at home, and worry that their children will pull away. Several fathers described arguments that led caregivers to stop answering calls for weeks.
             </p>
 
             <p>
-              Participants often raise differences in cultural practices and expectations around child-rearing. Even when a curriculum is
-              evidence-based, “good parenting” can be communicated in a way that feels normative — meaning it assumes one culturally specific
-              “right” way to parent. This often causes the 28/35 black participants to undermine the curriculum. 
+              Participants also raise differences in parenting expectations and cultural practice. Even when a curriculum is evidence based, it can communicate one normative standard as if it applies to everyone. That framing can reduce trust and participation.
             </p>
 
             <p>
-              But the biggest constraint is structural: relationships are built through repetition, and inside jail sustained contact is hard.
-              So even when people learn something useful, it’s difficult to practice it enough for it to stick.
+              The practical issue is consistency. Skills are hard to use when contact is limited and unpredictable, particularly when a single difficult call can end communication.
             </p>
 
-            <!-- NEW: symmetrical “takeaway” line (no nested box-in-box) -->
             <div class="callout callout--indigo" style="margin-top:1rem;">
               <p style="margin:0;">
-                <strong>Takeaway:</strong> when connection is fragile, the family system destabilizes — and reentry starts from a weaker base.
+                <strong>Takeaway:</strong> fragile contact weakens the family system and leaves less stability to build on after release.
               </p>
             </div>
           </div>
 
-          <!-- Card 2 -->
           <div class="card">
             <h3>Research on relationships and recidivism</h3>
 
             <p>
-              Research on recidivism consistently finds that people who maintain strong family connections during incarceration are less likely
-              to return to prison (Bales &amp; Mears, 2008; Mears et al., 2012). Visitation, phone contact, and other sustained communication are
-              associated with improved post-release outcomes, suggesting that relationships function as a stabilizing force during reentry.
+              Research on recidivism finds lower return to prison among people who maintain family ties during incarceration (Bales &amp; Mears, 2008; Mears et al., 2012). Visitation and other sustained contact are associated with better post release outcomes, which suggests that relationships support stability during reentry.
             </p>
 
             <p>
-Relationships are built through repetition. When contact is restricted, it sets off downstream effects that show up in families long after incarceration ends.
+              When connection breaks down, the effects compound over time. Caregivers take on more alone, conflict persists without repair, and people return home with weaker ties.
             </p>
 
-            <!-- NEW: matching “takeaway” line for symmetry -->
             <div class="callout callout--indigo" style="margin-top:1rem;">
               <p style="margin:0;">
-                <strong>Takeaway:</strong> healthy, consistent connection is the basis for stability and reentry.
+                <strong>Takeaway:</strong> stable connection supports reentry outcomes and reduces the costs of instability for families.
               </p>
             </div>
           </div>
@@ -168,39 +152,32 @@ Relationships are built through repetition. When contact is restricted, it sets 
 
     <div class="page-break"></div>
 
-    <!-- SOLUTION -->
     <section class="section" id="solution">
       <div class="container">
-        <h2>Solution: a relational credit economy</h2>
+        <h2>Solution</h2>
 
         <p class="section__lede">
-          The model is simple: providing sustained, voluntary engagement that unlocks more ways to stay connected
+          The system rewards voluntary engagement with more options for contact.
         </p>
 
-        <!-- NEW: remove repetition (no activity/reward lists here).
-             Instead: explain rationale + development + guardrails at a glance. -->
         <div class="grid-2">
           <div class="card">
             <h3>How engagement is designed</h3>
             <p>
-              Engagement formats are built for constrained environments: short calls, limited emotional bandwidth, and asynchronous communication.
-              They target specific frictions that repeatedly show up in incarceration-affected families: repair after conflict, co-parenting alignment,
-              emotional regulation, and maintaining routines with kids.
+              Activities are built for constrained environments and limited attention. They focus on repair after conflict, co-parenting alignment, and routines with children in ways that can fit into short windows of time.
             </p>
             <p class="muted">
-              Development is co-designed with practitioners (family therapists, reentry staff, program facilitators) and people with lived experience,
-              so the tools don’t assume one “right” cultural model of parenting.
+              The activity library is developed with practitioners and people with lived experience. This helps avoid a single cultural model of parenting being treated as the default.
             </p>
           </div>
 
           <div class="card">
             <h3>What credits unlock</h3>
             <p>
-              Credits unlock expanded connection options — for example, more flexibility in timing and format (minutes, messaging windows, video time),
-              and lower-friction ways to stay in touch.
+              Credits unlock additional connection options such as more flexible timing and lower friction formats. Rewards expand access rather than evaluate relationship quality.
             </p>
             <p class="muted">
-              Rewards expand access; they do not require disclosure of relationship content. The logic stays transparent and predictable.
+              The system does not require disclosure of conversation content and it does not score families on compliance.
             </p>
           </div>
         </div>
@@ -208,20 +185,17 @@ Relationships are built through repetition. When contact is restricted, it sets 
         <div class="card" style="margin-top:1.25rem;">
           <h3>Feasibility</h3>
           <p>
-            This does not necessarily require new hardware. Many facilities already use secure tablets for messaging, account access,
-            and approved content. The primary build is the application layer: credit logic, activity library, and a simple interface
-            that works under real constraints.
+            This does not require new hardware in many settings. Facilities already use secure tablets for messaging and approved content. The primary build is an application layer that manages credit logic, a structured activity library, and an interface that works under operational constraints.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- SIMULATOR -->
     <section class="section" id="simulator">
       <div class="container">
         <h2>Interactive simulator</h2>
         <p class="section__lede">
-          Proof of concept: select engagement activities and see how relational effort translates into expanded access.
+          Select engagement activities and see how credits translate into expanded access.
         </p>
 
         <div class="grid-2">
@@ -237,7 +211,7 @@ Relationships are built through repetition. When contact is restricted, it sets 
             <div class="checklist" id="activityList" aria-label="Engagement activity checklist"></div>
 
             <p class="muted small" style="margin-top: .9rem;">
-              Each activity is designed to be doable in short bursts and to support repair, routine, or co-parenting clarity — not compliance.
+              Activities are designed to support connection and skill practice without requiring performance or compliance.
             </p>
           </div>
 
@@ -265,7 +239,7 @@ Relationships are built through repetition. When contact is restricted, it sets 
             </div>
 
             <p class="muted small" style="margin-top: .9rem;">
-              Important: unlocks expand connection options. They are not tied to “good behavior” judgments and do not require monitoring conversations.
+              Unlocks expand contact options and they are not tied to judgment about the relationship.
             </p>
           </div>
         </div>
@@ -274,12 +248,11 @@ Relationships are built through repetition. When contact is restricted, it sets 
 
     <div class="page-break"></div>
 
-    <!-- SCALE -->
     <section class="section" id="scale">
       <div class="container">
         <h2>Scale</h2>
         <p class="section__lede">
-          This intervention is designed for incarceration-affected families first. How many people does it touch each year if implemented in one system?
+          Estimated direct reach in one system over one year.
         </p>
 
         <div class="scale-estimate">
@@ -293,7 +266,7 @@ Relationships are built through repetition. When contact is restricted, it sets 
               </div>
 
               <div class="estimate__row">
-                <div class="estimate__label">Children + caregivers reached</div>
+                <div class="estimate__label">Children and caregivers reached</div>
                 <div class="estimate__value" id="familyReached">—</div>
               </div>
 
@@ -304,7 +277,7 @@ Relationships are built through repetition. When contact is restricted, it sets 
             </div>
 
             <p class="estimate__note">
-              These are conservative “direct reach” numbers (not downstream effects like reduced recidivism).
+              This is a direct reach estimate. It does not include downstream effects.
             </p>
           </div>
 
@@ -329,7 +302,7 @@ Relationships are built through repetition. When contact is restricted, it sets 
             </div>
 
             <p class="muted small">
-              Estimated family members: ~2 children + ~2 caregivers/partners (more if extended family participates).
+              This assumes roughly two children and two caregivers or partners per enrolled parent.
             </p>
           </div>
         </div>
@@ -338,28 +311,27 @@ Relationships are built through repetition. When contact is restricted, it sets 
 
     <div class="page-break"></div>
 
-    <!-- ETHICS -->
     <section class="section" id="ethics">
       <div class="container">
-        <h2>Ethics &amp; reasoning</h2>
+        <h2>Ethics</h2>
 
         <div class="grid-2">
           <div class="card">
-            <h3>What this approach does</h3>
+            <h3>What this approach supports</h3>
             <ul class="bullets">
-              <li>expands opportunity for connection</li>
-              <li>lets families define what meaningful engagement means to them</li>
-              <li>supports practicing skills under real constraints</li>
-              <li>keeps the logic transparent</li>
+              <li>more opportunity for connection</li>
+              <li>multiple ways to participate</li>
+              <li>practice under realistic constraints</li>
+              <li>clear and predictable rules</li>
             </ul>
           </div>
 
           <div class="card">
             <h3>What it avoids</h3>
             <ul class="bullets">
-              <li>imposing “one right way” parenting norms that can reduce trust</li>
-              <li>using engagement data for punishment</li>
-              <li>policing relationship content or dynamics</li>
+              <li>imposing one parenting norm as default</li>
+              <li>using engagement data to punish families</li>
+              <li>evaluating relationship content</li>
             </ul>
           </div>
         </div>
@@ -367,34 +339,27 @@ Relationships are built through repetition. When contact is restricted, it sets 
         <div class="card">
           <h3>Guardrails</h3>
           <ul class="bullets">
-            <li><strong>No content surveillance:</strong> the system does not read or score calls, messages, or relationship content.</li>
-            <li><strong>Data minimization:</strong> it stores only what’s needed to compute credits and unlocks (e.g., activity completion + totals).</li>
-            <li><strong>Co-design:</strong> an advisory group with lived experience reviews the activity library and reward structure.</li>
-            <li><strong>Opt-in pathways:</strong> families can choose from multiple engagement formats and skip anything that feels irrelevant.</li>
-            <li><strong>Transparency + appeal:</strong> clear rules for unlocks and a process to resolve errors or disputes.</li>
+            <li><strong>No content surveillance</strong> the system does not read calls or messages.</li>
+            <li><strong>Data minimization</strong> it stores only what is needed to compute credits and unlocks.</li>
+            <li><strong>Co-design</strong> lived experience input reviews activities and rewards.</li>
+            <li><strong>Opt-in choices</strong> families can skip activities that do not fit their needs.</li>
+            <li><strong>Transparency</strong> clear rules for unlocks and a way to resolve errors.</li>
           </ul>
           <p class="muted small" style="margin-top:.75rem;">
-            By “normative parenting models,” I mean interventions that assume a culturally specific “right” way to parent — which can alienate families and reduce participation.
+            Normative parenting models assume one culturally specific standard of good parenting. That assumption can reduce trust and participation.
           </p>
         </div>
 
         <div class="callout">
           <p>
-            <strong>Beyond incarceration:</strong> many families struggle with fragmented connection, conflict, distance, and financial strain.
-            Building systems that support repair and continuity is a broader social need — but incarceration makes the stakes and constraints impossible to ignore.
+            Many families face conflict, distance, and financial strain outside the carceral system. Incarceration makes these pressures more intense and reduces the tools families can use to manage them.
           </p>
         </div>
-
-        <p class="muted" style="margin-top:1rem;">
-          That’s why I think family connection during incarceration is one of the most underrated social issues of our time: it sits upstream of child wellbeing,
-          caregiver stability, and reentry success.
-        </p>
       </div>
     </section>
 
     <div class="page-break"></div>
 
-    <!-- REFERENCES -->
     <section class="section" id="references">
       <div class="container">
         <h2>References</h2>
@@ -411,7 +376,7 @@ Relationships are built through repetition. When contact is restricted, it sets 
             <strong>Bales, W. D., &amp; Mears, D. P.</strong> (2008).
             Inmate social ties and the transition to society: Does visitation reduce recidivism?
             <em>Journal of Research in Crime and Delinquency</em>, 45(3), 287–321.
-            DOI:
+            DOI
             <a href="https://doi.org/10.1177/0022427808317574">10.1177/0022427808317574</a>
             <a href="#ref2" aria-label="Back to reference 2"></a>
           </li>
@@ -420,7 +385,7 @@ Relationships are built through repetition. When contact is restricted, it sets 
             <strong>Mears, D. P., Cochran, J. C., Siennick, S. E., &amp; Bales, W. D.</strong> (2012).
             Prison visitation and recidivism.
             <em>Justice Quarterly</em>, 29(6), 888–918.
-            DOI:
+            DOI
             <a href="https://doi.org/10.1080/07418825.2011.583932">10.1080/07418825.2011.583932</a>
             <a href="#ref3" aria-label="Back to reference 3"></a>
           </li>
@@ -459,11 +424,6 @@ Relationships are built through repetition. When contact is restricted, it sets 
       </div>
     </footer>
   </main>
-
-  <script src="script.js"></script>
-</body>
-</html>
-
 
   <script src="script.js"></script>
 </body>
