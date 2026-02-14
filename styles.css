@@ -629,23 +629,4 @@ h1::after{
 .top{
   text-decoration:none;
   font-weight:700;
-}
 
-/* =========================
-   PRINT (no forced orientation, print everything)
-========================= */
-
-@media print{
-  .page-break{ display:none !important; }
-
-  #motivation,
-  #problem,
-  #solution,
-  #simulator,
-  #scale,
-  #ethics,
-  #references{
-    break-before: page;
-    page-break-before: always; /* fallback */
-  }
-}
