@@ -497,6 +497,7 @@ h1::after{
 
 @media print {
 
+  #motivation
   #problem,
   #scale,
   #solution,
@@ -515,6 +516,45 @@ h1::after{
     page-break-inside: never;
   }
 
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+  appearance: none;
+  border: none;
+  border-radius: 14px;
+  padding: .6rem 1rem;
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+
+/* Primary button */
+.btn--primary{
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(47,92,255,.25);
+}
+
+.btn--primary:hover{
+  background: #1d3fe0;
+  transform: translateY(-1px);
+}
+
+/* Secondary button */
+.btn--secondary{
+  background: rgba(17,19,24,.06);
+  color: var(--text);
+  border: 1px solid rgba(17,19,24,.12);
+}
+
+.btn--secondary:hover{
+  background: rgba(17,19,24,.10);
 }
 
 
