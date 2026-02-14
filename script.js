@@ -1,9 +1,11 @@
-// Relational Credit Economy — simple, auditable prototype logic
-// (Keeps it transparent and easy to explain on the page.)
-
-// Relational Credit Economy — simulator logic
+// Relational Credit Economy — simulator + scale calculator
+// Safe to run even if some sections are missing on the page.
 
 window.addEventListener("DOMContentLoaded", () => {
+
+  /* =========================
+     SIMULATOR
+  ========================= */
 
   const ACTIVITIES = [
     {
@@ -51,7 +53,7 @@ window.addEventListener("DOMContentLoaded", () => {
     { at: 60, label: "Unlock: greater scheduling flexibility" }
   ];
 
-  const els = {
+  const sim = {
     activityList: document.getElementById("activityList"),
     totalCredits: document.getElementById("totalCredits"),
     progressFill: document.getElementById("progressFill"),
@@ -61,18 +63,17 @@ window.addEventListener("DOMContentLoaded", () => {
     resetAll: document.getElementById("resetAll")
   };
 
-  // HARD FAIL if HTML is wrong
-  const missing = Object.entries(els)
-    .filter(([_, el]) => !el)
-    .map(([key]) => key);
-
-  if (missing.length) {
-    console.error("Simulator missing required HTML IDs:", missing);
-    return;
-  }
+  const hasSimulator =
+    sim.activityList &&
+    sim.totalCredits &&
+    sim.progressFill &&
+    sim.progressText &&
+    sim.unlocksList &&
+    sim.loadExample &&
+    sim.resetAll;
 
   function renderActivities() {
-    els.activityList.innerHTML = "";
+    sim.activityList.innerHTML = "";
 
     ACTIVITIES.forEach(a => {
       const row = document.createElement("label");
@@ -80,13 +81,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
-      checkbox.dataset.points = a.points;
-
+      checkbox.dataset.points = String(a.points);
       checkbox.addEventListener("change", updateSimulator);
 
       const meta = document.createElement("div");
       meta.className = "item__meta";
-
       meta.innerHTML = `
         <div class="item__title">${a.title}</div>
         <div class="item__desc">${a.desc}</div>
@@ -95,102 +94,107 @@ window.addEventListener("DOMContentLoaded", () => {
 
       row.appendChild(checkbox);
       row.appendChild(meta);
-
-      els.activityList.appendChild(row);
+      sim.activityList.appendChild(row);
     });
   }
 
   function getTotalCredits() {
-    const inputs = els.activityList.querySelectorAll("input:checked");
-
+    const inputs = sim.activityList.querySelectorAll("input:checked");
     let total = 0;
-
-    inputs.forEach(i => {
-      total += Number(i.dataset.points);
-    });
-
+    inputs.forEach(i => (total += Number(i.dataset.points || 0)));
     return total;
   }
 
   function updateSimulator() {
     const total = getTotalCredits();
-
-    els.totalCredits.textContent = total;
+    sim.totalCredits.textContent = String(total);
 
     const unlocked = UNLOCKS.filter(u => total >= u.at);
 
-    els.unlocksList.innerHTML = unlocked.length
+    sim.unlocksList.innerHTML = unlocked.length
       ? unlocked.map(u => `<li>${u.label}</li>`).join("")
       : `<li class="muted">None yet.</li>`;
 
     const next = UNLOCKS.find(u => total < u.at);
 
     if (!next) {
-      els.progressFill.style.width = "100%";
-      els.progressText.textContent =
+      sim.progressFill.style.width = "100%";
+      sim.progressText.textContent =
         "Max tier reached — all prototype unlocks available.";
       return;
     }
 
     const prev = unlocked.length ? unlocked[unlocked.length - 1].at : 0;
-
     const pct = ((total - prev) / (next.at - prev)) * 100;
 
-    els.progressFill.style.width = `${Math.max(0, pct)}%`;
-
-    els.progressText.textContent =
+    sim.progressFill.style.width = `${Math.max(0, Math.min(100, pct))}%`;
+    sim.progressText.textContent =
       `Next unlock at ${next.at} credits. (${total}/${next.at})`;
   }
 
-  function reset() {
-    els.activityList
-      .querySelectorAll("input")
-      .forEach(i => (i.checked = false));
-
+  function resetSimulator() {
+    sim.activityList.querySelectorAll("input").forEach(i => (i.checked = false));
     updateSimulator();
   }
 
-  function loadExample() {
-    const boxes = els.activityList.querySelectorAll("input");
+  function loadSimulatorExample() {
+    const boxes = sim.activityList.querySelectorAll("input");
+    boxes.forEach((box, i) => { box.checked = i < 4; });
+    updateSimulator();
+  }
 
-    boxes.forEach((box, i) => {
-      if (i < 4) box.checked = true;
+  if (hasSimulator) {
+    sim.resetAll.addEventListener("click", resetSimulator);
+    sim.loadExample.addEventListener("click", loadSimulatorExample);
+    renderActivities();
+    updateSimulator();
+  }
+
+
+  /* =========================
+     SCALE CALCULATOR
+  ========================= */
+
+  const fmt = (n) => Math.round(n).toLocaleString();
+
+  const scale = {
+    parentsPerCohort: document.getElementById("parentsPerCohort"),
+    cohortsPerYear: document.getElementById("cohortsPerYear"),
+    familyPerParent: document.getElementById("familyPerParent"),
+    parentsServed: document.getElementById("parentsServed"),
+    familyReached: document.getElementById("familyReached"),
+    totalTouched: document.getElementById("totalTouched")
+  };
+
+  const hasScale =
+    scale.parentsPerCohort &&
+    scale.cohortsPerYear &&
+    scale.familyPerParent &&
+    scale.parentsServed &&
+    scale.familyReached &&
+    scale.totalTouched;
+
+  function recomputeScale() {
+    const parentsPerCohort = Number(scale.parentsPerCohort.value || 0);
+    const cohortsPerYear   = Number(scale.cohortsPerYear.value || 0);
+    const familyPerParent  = Number(scale.familyPerParent.value || 0);
+
+    const parentsServed = parentsPerCohort * cohortsPerYear;
+    const familyReached = parentsServed * familyPerParent;
+    const totalTouched  = parentsServed + familyReached;
+
+    scale.parentsServed.textContent = fmt(parentsServed);
+    scale.familyReached.textContent = fmt(familyReached);
+    scale.totalTouched.textContent  = fmt(totalTouched);
+  }
+
+  if (hasScale) {
+    ["parentsPerCohort", "cohortsPerYear", "familyPerParent"].forEach(key => {
+      scale[key].addEventListener("input", recomputeScale);
     });
-
-    updateSimulator();
+    recomputeScale();
   }
 
-  els.resetAll.addEventListener("click", reset);
-  els.loadExample.addEventListener("click", loadExample);
-
-  renderActivities();
-  updateSimulator();
 });
-
-
-function fmt(n){
-  return Math.round(n).toLocaleString();
-}
-
-function recomputeScale(){
-  const parentsPerCohort = Number(document.getElementById("parentsPerCohort").value || 0);
-  const cohortsPerYear   = Number(document.getElementById("cohortsPerYear").value || 0);
-  const familyPerParent  = Number(document.getElementById("familyPerParent").value || 0);
-
-  const parentsServed = parentsPerCohort * cohortsPerYear;
-  const familyReached = parentsServed * familyPerParent;
-  const totalTouched  = parentsServed + familyReached;
-
-  document.getElementById("parentsServed").textContent = fmt(parentsServed);
-  document.getElementById("familyReached").textContent = fmt(familyReached);
-  document.getElementById("totalTouched").textContent  = fmt(totalTouched);
-}
-
-["parentsPerCohort","cohortsPerYear","familyPerParent"].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) el.addEventListener("input", recomputeScale);
-});
-
-recomputeScale();
 
 
