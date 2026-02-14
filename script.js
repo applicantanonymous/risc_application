@@ -197,4 +197,34 @@ window.addEventListener("DOMContentLoaded", () => {
 
 });
 
+const activityList = document.getElementById("activityList");
+
+function renderActivities() {
+  activityList.innerHTML = "";
+
+  ACTIVITIES.forEach((a) => {
+    const row = document.createElement("label");
+    row.className = "activityRow";
+
+    row.innerHTML = `
+      <input class="activityRow__check" type="checkbox" data-id="${a.id}" />
+      <div class="activityRow__body">
+        <div class="activityRow__top">
+          <div class="activityRow__title">${a.title}</div>
+          <div class="activityRow__pts">${a.points} pts</div>
+        </div>
+        <div class="activityRow__desc">${a.desc}</div>
+      </div>
+    `;
+
+    activityList.appendChild(row);
+  });
+
+  activityList.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+    cb.addEventListener("change", onActivityToggle); // keep your existing handler name
+  });
+}
+
+// call once on load
+renderActivities();
 
