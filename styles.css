@@ -1,5 +1,9 @@
+/* =========================
+   TOKENS
+========================= */
+
 :root{
-  /* LIGHT THEME TOKENS */
+  /* Light theme */
   --bg:#f6f7fb;
   --panel:#ffffff;
   --panel2:#f3f5fb;
@@ -8,33 +12,53 @@
   --muted2:#6a7687;
   --border:rgba(17,19,24,.12);
   --shadow: 0 10px 26px rgba(17,19,24,.08);
-  --font-base: 14.5px;
 
-  /* ACCENTS (for “more colour” in underlines etc.) */
+  /* Accents */
   --accent:#2f5cff;
   --accent2:#ff9f2e;
   --accent3:#13b981;
 
+  /* Layout */
   --radius: 18px;
   --radius2: 24px;
   --max: 1100px;
+
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  --font-serif: "IBM Plex Serif", ui-serif, Georgia, "Times New Roman", Times, serif;
+  --font-base: 16px;
 }
+
+/* If you want Inter + IBM Plex Serif from Google Fonts, add in HTML <head>:
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+*/
+
+
+/* =========================
+   BASE
+========================= */
 
 *{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 
 body{
   margin:0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  font-family: var(--font-sans);
+  font-size: var(--font-base);
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
   background:
     radial-gradient(900px 500px at 20% 0%, rgba(47,92,255,.10), transparent 55%),
     radial-gradient(800px 450px at 90% 10%, rgba(255,159,46,.10), transparent 55%),
     radial-gradient(700px 400px at 60% 90%, rgba(19,185,129,.08), transparent 55%),
     var(--bg);
+
   color:var(--text);
-  line-height:1.65;
-  font-size: var(--font-base);
-  line-height: 1.65;
 }
 
 a{ color:var(--accent); }
@@ -48,7 +72,7 @@ code{
   color: #1d2c6a;
 }
 
-
+/* Accessibility skip link */
 .skip{
   position:absolute;
   top:-40px; left:10px;
@@ -65,59 +89,55 @@ code{
   margin: 0 auto;
 }
 
-/* TOPBAR */
-/* HEADER */
-.site-header {
+
+/* =========================
+   HEADER / NAV
+========================= */
+
+.site-header{
   padding: 10px 0;
-  border-bottom: 1px solid #e6e8ec;
-  background: white;
+  border-bottom: 1px solid rgba(17,19,24,.08);
+  background: #fff;
 }
 
-/* puts brand + nav on one row */
-.header__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.header__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 16px;
 }
 
-/* tighten brand */
-.brand__title {
-  font-weight: 600;
+.brand__title{
+  font-weight: 700;
   font-size: 14px;
-  letter-spacing: .04em;
+  letter-spacing: .06em;
 }
 
-.brand__sub {
+.brand__sub{
   font-size: 12px;
   color: #6b7280;
 }
 
-/* nav */
-.nav {
-  display: flex;
+.nav{
+  display:flex;
   gap: 26px;
+  flex-wrap: wrap;
 }
 
-.nav a {
-  text-decoration: none;
-  color: #374151;
-  font-weight: 500;
-  font-size: 14px;
+.nav a{
+  text-decoration:none;
+  color:#374151;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing: .01em;
 }
 
-.nav a:hover {
-  color: #111827;
-}
+.nav a:hover{ color:#111827; }
 
-/* HERO */
-.hero{
-  padding: 3.2rem 0 2rem;
-}
 
-/* Single-column hero (so motivation can span across) */
-.hero__grid{
-  display:block;
-}
+/* =========================
+   TYPE
+========================= */
 
 .kicker{
   margin:0 0 .25rem;
@@ -129,13 +149,14 @@ code{
 
 h1{
   margin:.2rem 0 .65rem;
+  font-family: var(--font-serif);
   font-size: clamp(2rem, 4vw, 3rem);
   line-height:1.12;
-  max-width: 60ch;
+  max-width: 52ch;
+  letter-spacing: -0.02em;
   position: relative;
 }
 
-/* Color underline under main title */
 h1::after{
   content:"";
   display:block;
@@ -146,59 +167,14 @@ h1::after{
   margin-top: .85rem;
 }
 
-.hook{
-  margin:0 0 1rem;
-  color: var(--muted);
-  font-size:1.05rem;
-}
-
-/* Synthesis callout box (different color) */
-.synthesis-box{
-  margin-top: 24px;
-  padding: 22px 26px;
-  border-radius: 18px;
-
-  /* different color from your other cards */
-  background: rgba(19, 185, 129, 0.10);  /* uses your --accent3 tone */
-  border: 1px solid rgba(19, 185, 129, 0.28);
-
-  color: var(--text);
-  box-shadow: 0 10px 26px rgba(17,19,24,.06);
-}
-
-.synthesis-box p{
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  font-weight: 500;
-}
-
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 80px;   /* increase this */
-}
-
-/* Motivation paragraph: wider but readable */
-.lede{
-  margin: 1.25rem 0 0;
-  color: var(--text);
-  font-size:1.08rem;
-  line-height: 1.85;
-  max-width: 95ch;
-}
-
-/* SECTIONS */
-.section{
-  padding: 2.5rem 0;
-}
 .section h2{
   margin:0 0 .75rem;
+  font-family: var(--font-serif);
   font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  letter-spacing: -0.02em;
   position: relative;
 }
 
-/* Color underline under section headers */
 .section h2::after{
   content:"";
   display:block;
@@ -212,38 +188,102 @@ h1::after{
 .section__lede{
   margin:0 0 1.25rem;
   color: var(--muted);
-  max-width: 80ch;
+  max-width: 72ch;
 }
 
-/* CARDS */
+.section p{
+  max-width: 72ch;
+}
+
+.lede{
+  margin: 1.25rem 0 0;
+  color: var(--text);
+  font-size:1.06rem;
+  line-height: 1.8;
+  max-width: 72ch;
+}
+
+.hook{
+  margin:0 0 1rem;
+  color: var(--muted);
+  font-size:1.05rem;
+}
+
+.muted{ color: var(--muted2); }
+.small{ font-size:.92rem; }
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  padding: 32px 0;
+}
+
+/* Main hero layout (left content + right stats column) */
+.hero__layout{
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 100px;             /* this is your “space the left side out more” */
+  align-items: start;
+}
+
+.hero__main{
+  max-width: 720px;
+}
+
+.hero__aside{
+  position: sticky;
+  top: 120px;
+}
+
+.hero__cards{
+  display:flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Mobile hero */
+@media (max-width: 1000px){
+  .hero__layout{ grid-template-columns: 1fr; gap: 28px; }
+  .hero__aside{ position: relative; top: 0; }
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section{ padding: 2.5rem 0; }
+
+
+/* =========================
+   CARDS
+========================= */
+
 .card{
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius2);
-  padding: 1.15rem 1.15rem;
+  padding: 1.35rem 1.35rem;
   box-shadow: var(--shadow);
 }
 
-/* HERO STATS: broader, still one-line */
-.hero__cards{
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
-  margin: 1.75rem 0 2.25rem;
-}
+.card{ height:100%; } /* keep if you want equal-height cards in grids */
 
-@media (max-width: 900px){
-  .hero__cards{ grid-template-columns: 1fr; }
-}
+
+/* =========================
+   STATS (RIGHT COLUMN)
+========================= */
 
 .stat{
-  padding: 1.55rem 1.55rem; /* broader */
+  padding: 1.55rem 1.55rem;
   border-radius: 22px;
   position: relative;
   overflow: hidden;
 }
 
-/* subtle colored edge on stat cards */
 .stat::before{
   content:"";
   position:absolute;
@@ -254,7 +294,7 @@ h1::after{
 }
 
 .stat__value{
-  font-size: 2.55rem;
+  font-size: 2.35rem;
   font-weight: 800;
   letter-spacing: .01em;
   color: var(--accent);
@@ -267,37 +307,18 @@ h1::after{
   line-height: 1.55;
 }
 
-.stat.big .stat__value{ font-size: 2.2rem; }
-
-/* GRIDS */
-.grid-2{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-}
-@media (max-width: 900px){
-  .grid-2{ grid-template-columns: 1fr; }
+.stat__kicker{
+  color: var(--muted2);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 6px;
 }
 
-.grid-3{
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  margin-bottom: 1rem;
-}
-@media (max-width: 900px){
-  .grid-3{ grid-template-columns: 1fr; }
-}
 
-/* LISTS */
-.bullets{
-  margin:.6rem 0 0;
-  padding-left: 1.1rem;
-  color: var(--muted);
-}
-.bullets li{ margin:.35rem 0; }
+/* =========================
+   CALLOUTS
+========================= */
 
-/* CALLOUT */
 .callout{
   margin-top: 1.35rem;
   padding: 1.2rem 1.25rem;
@@ -308,30 +329,59 @@ h1::after{
   border-left: 6px solid var(--accent);
 }
 
-/* Muted text helpers */
-.muted{ color: var(--muted2); }
-.small{ font-size:.92rem; }
+.callout--indigo{
+  background: rgba(47, 92, 255, 0.08);
+  border: 1px solid rgba(47, 92, 255, 0.22);
+}
 
-/* Figure captions etc. (kept for later even if you remove the graph) */
-.figure__title{
+.callout__strong{
+  margin-top: 12px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+
+/* =========================
+   GRIDS
+========================= */
+
+.grid-2{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px){
+  .grid-2{ grid-template-columns: 1fr; }
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 900px){
+  .grid-3{ grid-template-columns: 1fr; }
+}
+
+
+/* =========================
+   LISTS
+========================= */
+
+.bullets{
+  margin:.6rem 0 0;
+  padding-left: 1.1rem;
   color: var(--muted);
-  font-size:.95rem;
-  margin-bottom:.7rem;
 }
-.figure__caption{
-  margin-top:.6rem;
-  color: var(--muted2);
-  font-size:.9rem;
-}
+.bullets li{ margin:.35rem 0; }
 
-/* Mini quote */
-.mini-quote{
-  margin-top: .85rem;
-  padding: .9rem 1rem;
-  border-radius: 16px;
-  background: rgba(255,159,46,.08);
-  border: 1px solid rgba(255,159,46,.22);
-}
+
+/* =========================
+   SCALE ESTIMATE
+========================= */
 
 .scale-estimate{
   display:grid;
@@ -395,15 +445,8 @@ h1::after{
   line-height: 1.6;
 }
 
-.inputs{
-  display:grid;
-  gap: .75rem;
-}
-
-.input{
-  display:grid;
-  gap: .35rem;
-}
+.inputs{ display:grid; gap: .75rem; }
+.input{ display:grid; gap: .35rem; }
 
 .input span{
   font-size: .92rem;
@@ -419,11 +462,13 @@ h1::after{
   background: #fff;
   font-size: 1rem;
 }
- 
-/* Friction */
-.friction{
-  margin-top: 1rem;
-}
+
+
+/* =========================
+   FRICTION PILLS
+========================= */
+
+.friction{ margin-top: 1rem; }
 
 .friction__row{
   display:flex;
@@ -444,549 +489,8 @@ h1::after{
   position: relative;
 }
 
-
-
-/* small colored underline inside pills */
 .pill::after{
   content:"";
   display:block;
   width: 44px;
-  height: 3px;
-  border-radius: 999px;
-  margin: .6rem auto 0;
-  background: linear-gradient(90deg, var(--accent3), var(--accent));
-  opacity:.9;
-}
 
-.pill span{
-  display:block;
-  margin-top:.25rem;
-  color: var(--muted2);
-  font-size:.9rem;
-}
-
-.arrow{
-  color: var(--muted);
-  font-size: 1.2rem;
-  padding: 0 .25rem;
-}
-
-.friction__notes{
-  display:flex;
-  gap:1rem;
-  flex-wrap:wrap;
-  margin-top: .9rem;
-}
-.note{
-  flex: 1 1 260px;
-  padding: .85rem .95rem;
-  border-radius: 16px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  color: var(--muted);
-}
-
-.map-link{
-  display:block;
-  margin-top:16px;
-  border:1px solid var(--border);
-  border-radius:16px;
-  overflow:hidden;
-  background:var(--panel2);
-  text-decoration:none;
-  color:inherit;
-}
-
-.map-link__preview{
-  height:360px;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02)),
-    repeating-linear-gradient(
-      90deg,
-      rgba(0,0,0,.04) 0px,
-      rgba(0,0,0,.04) 8px,
-      rgba(0,0,0,.02) 8px,
-      rgba(0,0,0,.02) 16px
-    );
-}
-
-.map-link__text{
-  padding:16px 18px;
-  display:grid;
-  gap:6px;
-}
-
-.map-link:hover{
-  transform: translateY(-1px);
-  box-shadow: var(--shadow);
-}
-
-
-/* Map placeholder */
-.map__placeholder{
-  margin-top:.75rem;
-  height: 260px;
-  border-radius: 18px;
-  border: 1px dashed rgba(17,19,24,.18);
-  background: rgba(255,255,255,.75);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color: var(--muted);
-}
-.map__anchor{
-  margin:.85rem 0 0;
-  color: var(--muted);
-}
-
-.container-narrow{
-  width: min(760px, calc(100% - 2rem));
-  margin: 0 auto;
-} 
-.motivation-band{
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-.motivation{
-  font-size: 1.1rem;
-  line-height: 1.9;
-  margin: 0;
-}
-/* Buttons */
-.sim__header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:.75rem;
-}
-.sim__buttons{ display:flex; gap:.5rem; flex-wrap:wrap; }
-
-.btn{
-  border: 1px solid rgba(47,92,255,.22);
-  background: rgba(47,92,255,.08);
-  color: var(--text);
-  border-radius: 14px;
-  padding: .55rem .85rem;
-  cursor:pointer;
-}
-.btn:hover{
-  background: rgba(47,92,255,.12);
-  border-color: rgba(47,92,255,.30);
-}
-.btn--ghost{
-  background: transparent;
-}
-
-/* Checklist items */
-.checklist{
-  margin-top:.85rem;
-  display:flex;
-  flex-direction:column;
-  gap:.6rem;
-}
-.item{
-  display:flex;
-  align-items:flex-start;
-  gap:.7rem;
-  padding:.75rem .85rem;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: var(--panel);
-}
-.item input{ transform: translateY(2px); }
-.item__meta{
-  display:flex;
-  flex-direction:column;
-  gap:.15rem;
-}
-.item__title{ font-weight:650; }
-.item__desc{ color: var(--muted2); font-size:.92rem; }
-.item__pts{ color: var(--muted); font-size:.92rem; margin-top:.15rem; }
-
-/* Meter */
-.meter{
-  display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  gap:1rem;
-  margin-top:.5rem;
-}
-.meter__label{ color: var(--muted); }
-.meter__value{
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: var(--accent);
-}
-
-/* Progress */
-.progress{ margin-top: 1rem; }
-.progress__label{ color: var(--muted); margin-bottom:.4rem; }
-
-.progress__bar{
-  width:100%;
-  height: 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(17,19,24,.14);
-  background: rgba(47,92,255,.08);
-  overflow:hidden;
-}
-.progress__fill{
-  height:100%;
-  background: linear-gradient(90deg, var(--accent), var(--accent3));
-  width:0%;
-}
-.progress__text{ margin-top:.45rem; color: var(--muted2); }
-
-/* Unlocks */
-.unlocks{ margin-top: 1rem; }
-.unlocks__label{ color: var(--muted); margin-bottom:.35rem; }
-.unlocks__list{
-  margin:.25rem 0 0;
-  padding-left: 1.1rem;
-  color: var(--muted);
-}
-
-/* References */
-.refs{
-  margin: .75rem 0 0;
-  padding-left: 1.25rem;
-  color: var(--text);
-}
-.refs li{
-  margin: .9rem 0;
-}
-.ref__meta{
-  margin-top:.35rem;
-  color: var(--muted2);
-  font-size:.92rem;
-}
-.ref__src{ color: var(--muted); }
-
-/* Footer */
-.footer{
-  padding: 1.5rem 0 2.5rem;
-  border-top: 1px solid var(--border);
-  margin-top: 1.5rem;
-}
-.footer__inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  flex-wrap:wrap;
-}
-.top{
-  text-decoration:none;
-  padding:.35rem .55rem;
-  border-radius: 12px;
-  border: 1px solid rgba(47,92,255,.22);
-  background: rgba(47,92,255,.06);
-  color: var(--muted);
-}
-.top:hover{
-  color: var(--text);
-  border-color: rgba(47,92,255,.30);
-  background: rgba(47,92,255,.10);
-}
-
-
-/* ---------------- HERO LAYOUT ---------------- */
-.hero{
-  padding-top: 32px;
-  padding-bottom: 32px; /* was 64px */
-}
-
-.hero__layout {
-  display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
-  gap: 48px;
-  align-items: start;
-}
-
-/* prevents text from becoming too wide */
-.hero__main {
-  max-width: 720px;
-}
-
-/* right column */
-.hero__aside {
-  position: sticky;
-  top: 120px;   /* cards float slightly while scrolling */
-}
-
-/* stack cards vertically */
-.hero__cards {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-/* MOBILE */
-@media (max-width: 1000px) {
-  .hero__layout {
-    grid-template-columns: 1fr;
-  }
-
-  .hero__aside {
-    position: relative;
-    top: 0;
-  }
-}
-.scale-layout{
-  display:grid;
-  grid-template-columns: 380px 1fr;
-  gap:32px;
-  align-items:stretch;
-}
-
-.scale-left{
-  display:grid;
-  gap:24px;
-}
- 
-/* SCALE section helpers (safe to add even if you already have card/grid styles) */
-.impact-dl{
-  margin: 18px 0 22px;
-  display: grid;
-  gap: 12px;
-}
-.impact-dl__row{
-  display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 12px;
-}
-@media (max-width: 520px){
-  .impact-dl__row{ grid-template-columns: 1fr; }
-}
-.impact-dl dt{
-  color: var(--muted2);
-  font-weight: 700;
-}
-.impact-dl dd{
-  margin: 0;
-  color: var(--text);
-  line-height: 1.65;
-}
-
-/* Small kicker above the big stat */
-.stat__kicker{
-  color: var(--muted2);
-  font-size: 0.85rem;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-/* Vera embed styling */
-.map-embed{
-  margin-top:16px;
-  border-radius:16px;
-  overflow:hidden;
-  height:520px;
-}
-
-.map-embed iframe{
-  width:100%;
-  height:100%;
-  border:0;
-}
-.card{
-  height:100%;
-}
-
-
-/* Callout variant (different colour) */
-.callout--indigo{
-  background: rgba(47, 92, 255, 0.08);
-  border: 1px solid rgba(47, 92, 255, 0.22);
-}
-.callout__strong{
-  margin-top: 12px;
-  font-weight: 700;
-  line-height: 1.7;
-}
-
-/* Link style used above */
-.ext{
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 700;
-}
-.ext:hover{ text-decoration: underline; }
-
-.refs li{
-  scroll-margin-top:120px;
-}
-
-.references li{
-  margin-bottom: 0.9rem;
-  padding-left: 1.4rem;
-  text-indent: -1.4rem;
-}
-
-/* =========================
-   TYPOGRAPHY UPGRADE (minimal overrides)
-   ========================= */
-
-/* add font tokens without changing your palette */
-:root{
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-  --font-serif: "IBM Plex Serif", ui-serif, Georgia, "Times New Roman", Times, serif;
-  --font-base: 16px; /* was 14.5px — this alone improves “seriousness” */
-}
-
-/* body font + slightly tighter global rhythm */
-body{
-  font-family: var(--font-sans);
-  line-height: 1.7;   /* keep readable but less floaty than 1.85 */
-  letter-spacing: -0.01em;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-/* headings: instantly more “designed” */
-h1, .section h2{
-  font-family: var(--font-serif);
-  letter-spacing: -0.02em;
-}
-
-h1{
-  max-width: 52ch; /* tighter than 60ch = more editorial */
-}
-
-/* keep body text from spanning too wide everywhere */
-.section p,
-.section__lede,
-.refs{
-  max-width: 72ch;
-}
-
-/* lede was too wide: 95ch reads like a report dump */
-.lede{
-  max-width: 72ch;
-  font-size: 1.06rem;
-  line-height: 1.8;
-}
-
-/* nav/header: small but makes it look “real” */
-.site-header{
-  border-bottom: 1px solid rgba(17,19,24,.08);
-}
-
-.brand__title{
-  font-weight: 700;
-  letter-spacing: .06em;
-}
-
-.nav a{
-  font-weight: 600;
-  letter-spacing: .01em;
-}
-
-/* cards: slightly more padding reads more premium */
-.card{
-  padding: 1.35rem 1.35rem; /* was 1.15 */
-}
-
-/* stat numbers: calmer and less “poster-y” */
-.stat__value{
-  font-size: 2.35rem; /* was 2.55 */
-}
-
-
-/* =========================
-   PRINT FIXES (required)
-   - you currently have nested @media print blocks and missing braces
-   - this overrides cleanly and ensures light blue background prints
-   ========================= */
-/* =========================
-   PRINT STYLES
-========================= */
-
-@media print {
-
-  /* Ensure background colors print */
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  body {
-    background: #f6f7fb !important; /* light blue */
-    color: #111318;
-    margin: 0;
-  }
-
-  /* Clean layout width for print */
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  /* Avoid awkward splits */
-  .section {
-    page-break-inside: avoid;
-    break-inside: avoid;
-    padding: 40px 0;
-  }
-
-  /* Force major sections onto new pages */
-  #problem,
-  #solution,
-  #scale,
-  #references {
-    page-break-before: always;
-  }
-
-  /* Clean reference layout */
-  .refs {
-    column-count: 1;
-  }
-
-  /* Remove link styling in print */
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-}
-
-
-/* =========================
-   WEBSITE FONTS (Inter + IBM Plex Serif)
-========================= */
-
-:root{
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-  --font-serif: "IBM Plex Serif", ui-serif, Georgia, "Times New Roman", Times, serif;
-
-  /* slightly more premium default size */
-  --font-base: 16px;
-}
-
-body{
-  font-family: var(--font-sans);
-  font-size: var(--font-base);
-  line-height: 1.7;
-  letter-spacing: -0.01em;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-/* headings feel “editorial” */
-h1, .section h2, h2, h3{
-  font-family: var(--font-sans);
-  letter-spacing: -0.02em;
-}
-
-/* keep long lines readable */
-.section p,
-.section__lede{
-  max-width: 72ch;
-}
-
-/* your lede was too wide */
-.lede{
-  max-width: 72ch;
-  line-height: 1.8;
-}
