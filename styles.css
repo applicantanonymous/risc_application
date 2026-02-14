@@ -665,134 +665,149 @@ h1::after{
 .page-break {
   display: none;
 }
-
+/* =========================
+   PRINT (single source of truth)
+   Paste this at the VERY bottom
+========================= */
 @media print {
-
-  /* Page margin only */
-  @page {
-    margin: 0.75in;
-  }
-
-  /* Remove background gradients */
-  body {
-    background: #fff !important;
-  }
-
-  /* Remove all shadows (cards + buttons) */
+  /* Print color fidelity (Chrome) */
   * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
     box-shadow: none !important;
     text-shadow: none !important;
   }
 
-  /* Disable sticky behavior for print */
-  .hero__aside {
-    position: static !important;
-  }
-
-  /* Show page breaks only in print */
-  .page-break {
-    display: block !important;
-    break-before: page;
-    page-break-before: always;
-  }
-
-  /* Prevent cards from splitting awkwardly */
-  .card,
-  .callout,
-  .section {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-}
-
-/* PRINT: light-blue page like the site */
-@media print {
-  /* Force browsers (esp. Chrome) to actually print backgrounds */
-  * {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  /* Tighten margins + make the PAPER light blue */
+  /* Page setup */
   @page {
-    margin: 0.5in 0.4in; /* top/bottom | left/right */
+    margin: 0.55in 0.45in; /* top/bottom | left/right */
   }
 
   html, body {
-    background: #f6f7fb !important;  /* your site light blue */
     margin: 0 !important;
+    padding: 0 !important;
+
+    /* Light blue paper */
+    background: #f6f7fb !important;
+
+    /* Make text readable */
+    font-size: 17px !important;     /* bump from 16 → 17 */
+    line-height: 1.55 !important;
+    color: #111318 !important;
   }
 
-  /* Make content go full width (not constrained by --max) */
+  /* Layout: use the printable width */
+  :root {
+    --max: 100% !important;
+  }
+
   .container {
     max-width: none !important;
     width: 100% !important;
+    margin: 0 auto !important;
     padding-left: 0.15in !important;
     padding-right: 0.15in !important;
   }
 
-  /* Keep cards white for contrast (optional but usually nicest) */
-  .card {
-    background: #ffffff !important;
-    box-shadow: none !important;
-    border: 1px solid rgba(17,19,24,.12) !important;
-  }
-}
-
-
-/* PRINT: fix tiny text + make sections feel full-width */
-@media print {
-  /* Always print colors properly */
-  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-
-  /* Margins and page */
-  @page { margin: 0.55in 0.45in; }
-
-  /* Increase overall print type size */
-  html, body {
-    margin: 0 !important;
-    font-size: 16px !important;      /* <- main fix for tiny print */
-    line-height: 1.45 !important;
-    background: #f6f7fb !important;  /* keep your light blue */
+  /* Remove sticky sidebar behavior (prints weird) */
+  .hero__aside {
+    position: static !important;
+    top: auto !important;
   }
 
-  /* Make content use the printable width */
-  .container{
-    max-width: none !important;
-    width: 100% !important;
-    padding-left: 0.15in !important;
-    padding-right: 0.15in !important;
+  /* Hide interactive + nav UI for print */
+  .site-header,
+  .nav,
+  .skip,
+  button,
+  .btn,
+  .sim__buttons {
+    display: none !important;
   }
 
-  /* Headings: bump up so hierarchy looks right on paper */
-  h1{ font-size: 30px !important; line-height: 1.1 !important; }
-  h2{ font-size: 20px !important; margin-top: 0.35in !important; }
-  h3{ font-size: 16.5px !important; }
+  /* Typography: clearer hierarchy */
+  h1 {
+    font-size: 32px !important;
+    line-height: 1.1 !important;
+    max-width: none !important; /* allow full width in print */
+  }
 
-  /* Body copy */
-  p, li{
+  .section h2 {
+    font-size: 22px !important;
+    line-height: 1.15 !important;
+    margin-top: 0.25in !important;
+  }
+
+  h3 {
+    font-size: 17px !important;
+    line-height: 1.25 !important;
+  }
+
+  p, li {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Muted text often ends up too small when printing */
+  .muted,
+  .section__lede,
+  .stat__label,
+  .progress__text,
+  .activityRow__desc,
+  .estimate__note {
     font-size: 15.5px !important;
-    line-height: 1.5 !important;
+    line-height: 1.55 !important;
+    color: #4f5b6b !important;
   }
 
-  /* “Muted” text often prints way too small */
-  .muted, .section__lede, .stat__label{
-    font-size: 14.5px !important;
-    line-height: 1.45 !important;
+  /* Make “Motivation” and other paragraphs wider in print */
+  .section p,
+  .section__lede {
+    max-width: none !important;
   }
 
-  /* Motivation block: make it read like a “brief” */
-  #problem p, #scale p, #solution p, #sources li,
-  #problem .notes, #problem .takeaway,
-  #top p {
-    max-width: 95ch;           /* wider text measure for print */
-  }
-
-  /* Cards: keep clean in print */
-  .card{
-    background: #fff !important;
-    box-shadow: none !important;
+  /* Cards: keep white on blue page */
+  .card,
+  .callout,
+  .meter,
+  .progress,
+  .unlocks,
+  .estimate__row,
+  .activityRow {
+    background: #ffffff !important;
     border: 1px solid rgba(17,19,24,.12) !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Optional: soften heavy colored callouts for print */
+  .callout,
+  .callout--indigo,
+  .estimate__row.total {
+    background: rgba(47,92,255,.06) !important;
+    border-color: rgba(47,92,255,.18) !important;
+  }
+
+  /* Avoid awkward splits on headings */
+  h1, h2, h3 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Your manual page breaks */
+  .page-break {
+    display: block !important;
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+
+  /* Add the website link on every printed page */
+  body::after {
+    content: "https://applicantanonymous.github.io/risc_application/";
+    position: fixed;
+    bottom: 0.25in;
+    right: 0.45in;
+    font-size: 10.5px;
+    color: #6a7687;
   }
 }
-
