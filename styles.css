@@ -3,7 +3,6 @@
 ========================= */
 
 :root{
-  /* Light theme */
   --bg:#f6f7fb;
   --panel:#ffffff;
   --panel2:#f3f5fb;
@@ -13,28 +12,19 @@
   --border:rgba(17,19,24,.12);
   --shadow: 0 10px 26px rgba(17,19,24,.08);
 
-  /* Accents */
   --accent:#2f5cff;
   --accent2:#ff9f2e;
   --accent3:#13b981;
 
-  /* Layout */
   --radius: 18px;
   --radius2: 24px;
   --max: 1100px;
 
-  /* Typography */
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
   --font-serif: "IBM Plex Serif", ui-serif, Georgia, "Times New Roman", Times, serif;
+
   --font-base: 16px;
 }
-
-/* If you want Inter + IBM Plex Serif from Google Fonts, add in HTML <head>:
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Serif:wght@400;600;700&display=swap" rel="stylesheet">
-*/
-
 
 /* =========================
    BASE
@@ -72,10 +62,16 @@ code{
   color: #1d2c6a;
 }
 
+.container{
+  width: min(var(--max), calc(100% - 2rem));
+  margin: 0 auto;
+}
+
 /* Accessibility skip link */
 .skip{
   position:absolute;
-  top:-40px; left:10px;
+  top:-40px;
+  left:10px;
   background:var(--text);
   color:#fff;
   padding:.5rem .75rem;
@@ -83,12 +79,6 @@ code{
   z-index:999;
 }
 .skip:focus{ top:10px; }
-
-.container{
-  width: min(var(--max), calc(100% - 2rem));
-  margin: 0 auto;
-}
-
 
 /* =========================
    HEADER / NAV
@@ -134,7 +124,6 @@ code{
 
 .nav a:hover{ color:#111827; }
 
-
 /* =========================
    TYPE
 ========================= */
@@ -154,7 +143,6 @@ h1{
   line-height:1.12;
   max-width: 52ch;
   letter-spacing: -0.02em;
-  position: relative;
 }
 
 h1::after{
@@ -172,7 +160,6 @@ h1::after{
   font-family: var(--font-serif);
   font-size: clamp(1.35rem, 2.4vw, 1.75rem);
   letter-spacing: -0.02em;
-  position: relative;
 }
 
 .section h2::after{
@@ -195,23 +182,8 @@ h1::after{
   max-width: 72ch;
 }
 
-.lede{
-  margin: 1.25rem 0 0;
-  color: var(--text);
-  font-size:1.06rem;
-  line-height: 1.8;
-  max-width: 72ch;
-}
-
-.hook{
-  margin:0 0 1rem;
-  color: var(--muted);
-  font-size:1.05rem;
-}
-
 .muted{ color: var(--muted2); }
 .small{ font-size:.92rem; }
-
 
 /* =========================
    HERO
@@ -221,11 +193,10 @@ h1::after{
   padding: 32px 0;
 }
 
-/* Main hero layout (left content + right stats column) */
 .hero__layout{
   display: grid;
   grid-template-columns: 1.25fr 0.75fr;
-  gap: 100px;             /* this is your “space the left side out more” */
+  gap: 100px;
   align-items: start;
 }
 
@@ -244,19 +215,16 @@ h1::after{
   gap: 18px;
 }
 
-/* Mobile hero */
 @media (max-width: 1000px){
   .hero__layout{ grid-template-columns: 1fr; gap: 28px; }
   .hero__aside{ position: relative; top: 0; }
 }
-
 
 /* =========================
    SECTIONS
 ========================= */
 
 .section{ padding: 2.5rem 0; }
-
 
 /* =========================
    CARDS
@@ -266,19 +234,23 @@ h1::after{
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius2);
-  padding: 1.35rem 1.35rem;
+  padding: 1.35rem;
   box-shadow: var(--shadow);
+  height: 100%;
 }
 
-.card{ height:100%; } /* keep if you want equal-height cards in grids */
-
+/* In cards/callouts, let text use full width */
+.card p,
+.callout p{
+  max-width: none;
+}
 
 /* =========================
-   STATS (RIGHT COLUMN)
+   STATS
 ========================= */
 
 .stat{
-  padding: 1.55rem 1.55rem;
+  padding: 1.55rem;
   border-radius: 22px;
   position: relative;
   overflow: hidden;
@@ -287,7 +259,9 @@ h1::after{
 .stat::before{
   content:"";
   position:absolute;
-  left:0; top:0; bottom:0;
+  left:0;
+  top:0;
+  bottom:0;
   width: 6px;
   background: linear-gradient(180deg, var(--accent), var(--accent2));
   opacity:.9;
@@ -307,14 +281,6 @@ h1::after{
   line-height: 1.55;
 }
 
-.stat__kicker{
-  color: var(--muted2);
-  font-size: 0.85rem;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-
 /* =========================
    CALLOUTS
 ========================= */
@@ -330,16 +296,9 @@ h1::after{
 }
 
 .callout--indigo{
-  background: rgba(47, 92, 255, 0.08);
-  border: 1px solid rgba(47, 92, 255, 0.22);
+  background: rgba(47,92,255,.08);
+  border: 1px solid rgba(47,92,255,.22);
 }
-
-.callout__strong{
-  margin-top: 12px;
-  font-weight: 700;
-  line-height: 1.7;
-}
-
 
 /* =========================
    GRIDS
@@ -366,7 +325,6 @@ h1::after{
   .grid-3{ grid-template-columns: 1fr; }
 }
 
-
 /* =========================
    LISTS
 ========================= */
@@ -378,6 +336,45 @@ h1::after{
 }
 .bullets li{ margin:.35rem 0; }
 
+/* =========================
+   BUTTONS (clean, nice)
+========================= */
+
+.btn{
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  border-radius: 999px;
+  padding: .55rem .9rem;
+  font-size: .92rem;
+  font-weight: 650;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease, background .12s ease;
+  box-shadow: 0 8px 18px rgba(17,19,24,.06);
+}
+
+.btn:hover{
+  transform: translateY(-1px);
+  border-color: rgba(47,92,255,.35);
+  box-shadow: 0 12px 24px rgba(17,19,24,.10);
+}
+
+.btn:active{
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(17,19,24,.08);
+}
+
+.btn--ghost{
+  background: transparent;
+  box-shadow: none;
+}
+
+.btn--ghost:hover{
+  background: rgba(47,92,255,.06);
+}
 
 /* =========================
    SCALE ESTIMATE
@@ -463,88 +460,12 @@ h1::after{
   font-size: 1rem;
 }
 
-
 /* =========================
-   FRICTION PILLS
+   SIMULATOR
 ========================= */
 
-.friction{ margin-top: 1rem; }
-
-.friction__row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:.75rem;
-  flex-wrap:wrap;
-  margin-top:.5rem;
-}
-
-.pill{
-  flex: 1 1 220px;
-  padding: .9rem 1rem;
-  border-radius: 18px;
-  border: 1px solid var(--border);
-  background: var(--panel2);
-  text-align:center;
-  position: relative;
-}
-
-.pill::after{
-  content:"";
-  display:block;
-  width: 44px;
-
-
-@media print {
-
-  #motivation
-  #problem,
-  #scale,
-  #solution,
-  #simulator,
-  #references {
-    break-before: page;
-    page-break-before: always;
-  }
-
-}
-
-@media print {
-
-  .section {
-    break-inside: never;
-    page-break-inside: never;
-  }
-
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.btn{
-  appearance: none;
-  border: none;
-  border-radius: 14px;
-  padding: .6rem 1rem;
-  font-size: .95rem;
-  font-weight: 600;
-  letter-spacing: .01em;
-  cursor: pointer;
-  transition: all .15s ease;
-}
-
-/* =========================
-   BUTTONS (clean + subtle)
-========================= */
-
-
-/* =========================
-   SIMULATOR UI POLISH
-   ========================= */
-
-#simulator .section__lede{
-  max-width: 62ch;
+#simulator .grid-2{
+  align-items: start;
 }
 
 .sim__header{
@@ -552,7 +473,7 @@ h1::after{
   align-items:flex-start;
   justify-content:space-between;
   gap: .75rem;
-  margin-bottom: .9rem;
+  margin-bottom: .85rem;
 }
 
 .sim__buttons{
@@ -561,236 +482,19 @@ h1::after{
   flex-wrap:wrap;
 }
 
-.btn{
-  border:1px solid var(--border);
-  background: var(--panel);
-  padding:.55rem .8rem;
-  border-radius: 999px;
-  font-weight:600;
-  line-height:1;
-  cursor:pointer;
-  box-shadow: 0 6px 18px rgba(17,19,24,.06);
-  transition: transform .08s ease, box-shadow .12s ease, border-color .12s ease;
-}
-.btn:hover{
-  transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(17,19,24,.10);
-  border-color: rgba(47,92,255,.35);
-}
-.btn:active{ transform: translateY(0); }
-
-.btn--ghost{
-  background: transparent;
-  box-shadow:none;
-}
-
-/* Checklist rows */
 .checklist{
   display:flex;
   flex-direction:column;
-  gap:.55rem;
+  gap:.6rem;
   margin-top:.25rem;
 }
 
-.check{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:.75rem;
-  padding:.75rem .85rem;
-  border:1px solid var(--border);
-  background: var(--panel2);
-  border-radius: 14px;
-  transition: background .12s ease, border-color .12s ease, transform .08s ease;
-}
-.check:hover{
-  background: #ffffff;
-  border-color: rgba(47,92,255,.25);
-  transform: translateY(-1px);
-}
-
-.check__left{
-  display:flex;
-  gap:.65rem;
-  align-items:flex-start;
-  min-width: 0;
-}
-.check input{
-  margin-top:.15rem;
-  transform: scale(1.05);
-}
-
-.check__meta{
-  min-width:0;
-}
-.check__title{
-  font-weight:700;
-  margin:0;
-}
-.check__desc{
-  margin:.25rem 0 0 0;
-  color: var(--muted);
-  font-size: .95rem;
-  line-height: 1.35;
-}
-
-.pill{
-  flex: 0 0 auto;
-  font-weight:700;
-  font-size:.9rem;
-  padding:.25rem .55rem;
-  border-radius:999px;
-  border:1px solid rgba(17,19,24,.12);
-  background:#fff;
-}
-
-/* Right card hierarchy */
-.meter{
-  display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  padding:.85rem .95rem;
-  border:1px solid var(--border);
-  border-radius: 16px;
-  background: var(--panel2);
-  margin-bottom: .9rem;
-}
-.meter__label{
-  font-size:.8rem;
-  letter-spacing:.06em;
-  color: var(--muted2);
-  font-weight:700;
-}
-.meter__value{
-  font-size: 2.15rem;
-  font-weight: 800;
-}
-
-.progress{
-  padding:.85rem .95rem;
-  border:1px solid var(--border);
-  border-radius: 16px;
-  background: var(--panel);
-  margin-bottom: .9rem;
-}
-.progress__label{
-  font-size:.8rem;
-  letter-spacing:.06em;
-  color: var(--muted2);
-  font-weight:700;
-  margin-bottom:.5rem;
-}
-.progress__bar{
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(17,19,24,.08);
-  overflow:hidden;
-}
-.progress__fill{
-  height:100%;
-  border-radius: 999px;
-  background: var(--accent);
-  width:0%;
-  transition: width .2s ease;
-}
-.progress__text{
-  margin-top:.55rem;
-  color: var(--muted);
-  font-size:.95rem;
-}
-
-.unlocks{
-  padding:.85rem .95rem;
-  border:1px solid var(--border);
-  border-radius: 16px;
-  background: var(--panel2);
-}
-.unlocks__label{
-  font-size:.8rem;
-  letter-spacing:.06em;
-  color: var(--muted2);
-  font-weight:700;
-  margin-bottom:.55rem;
-}
-.unlocks__list{
-  margin:0;
-  padding-left: 1.05rem;
-}
-.unlocks__list li{
-  margin:.3rem 0;
-}
-
-/* A little more breathing room on the simulator cards */
-#simulator .card{
-  padding: 1.05rem;
-}
-
-
-/* Simulator layout polish */
-#simulator .grid-2 {
-  align-items: start;
-}
-
-#simulator .card {
-  padding: 1.05rem;
-}
-
-.sim__header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: .75rem;
-  margin-bottom: .85rem;
-}
-
-.sim__buttons {
-  display: flex;
-  gap: .5rem;
-}
-
-/* Buttons */
-.btn {
-  appearance: none;
-  border: 1px solid var(--border);
-  background: var(--panel);
-  padding: .55rem .8rem;
-  border-radius: 999px;
-  font-weight: 650;
-  font-size: .95rem;
-  line-height: 1;
-  cursor: pointer;
-  transition: transform .08s ease, border-color .12s ease, box-shadow .12s ease;
-  box-shadow: 0 8px 18px rgba(17,19,24,.06);
-}
-
-.btn:hover {
-  transform: translateY(-1px);
-  border-color: rgba(47,92,255,.30);
-  box-shadow: 0 12px 24px rgba(17,19,24,.10);
-}
-
-.btn:active {
-  transform: translateY(0);
-}
-
-.btn--ghost {
-  background: transparent;
-  box-shadow: none;
-}
-
-/* Make the activity list feel like a UI */
-.checklist {
-  display: flex;
-  flex-direction: column;
-  gap: .6rem;
-  margin-top: .25rem;
-}
-
-.activityRow {
-  display: grid;
+/* If your JS uses activityRow */
+.activityRow{
+  display:grid;
   grid-template-columns: 18px 1fr;
-  gap: .75rem;
-  padding: .8rem .85rem;
+  gap:.75rem;
+  padding:.8rem .85rem;
   border-radius: 16px;
   border: 1px solid var(--border);
   background: var(--panel2);
@@ -798,38 +502,38 @@ h1::after{
   transition: transform .08s ease, border-color .12s ease, background .12s ease;
 }
 
-.activityRow:hover {
+.activityRow:hover{
   transform: translateY(-1px);
   background: #fff;
   border-color: rgba(47,92,255,.24);
 }
 
-.activityRow__check {
-  margin-top: .2rem;
-  width: 18px;
-  height: 18px;
+.activityRow__check{
+  margin-top:.2rem;
+  width:18px;
+  height:18px;
 }
 
-.activityRow__top {
-  display: flex;
+.activityRow__top{
+  display:flex;
   align-items: baseline;
   justify-content: space-between;
   gap: .75rem;
 }
 
-.activityRow__title {
+.activityRow__title{
   font-weight: 750;
 }
 
-.activityRow__desc {
-  margin-top: .25rem;
+.activityRow__desc{
+  margin-top:.25rem;
   color: var(--muted);
   font-size: .95rem;
   line-height: 1.35;
   max-width: 60ch;
 }
 
-.activityRow__pts {
+.activityRow__pts{
   font-weight: 750;
   font-size: .9rem;
   padding: .22rem .55rem;
@@ -840,16 +544,15 @@ h1::after{
   white-space: nowrap;
 }
 
-/* Right card hierarchy */
-.meter, .progress, .unlocks {
+.meter, .progress, .unlocks{
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: .85rem .95rem;
 }
 
-.meter {
+.meter{
   background: var(--panel2);
-  display: flex;
+  display:flex;
   align-items: baseline;
   justify-content: space-between;
   margin-bottom: .9rem;
@@ -857,7 +560,7 @@ h1::after{
 
 .meter__label,
 .progress__label,
-.unlocks__label {
+.unlocks__label{
   font-size: .78rem;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -865,17 +568,17 @@ h1::after{
   font-weight: 750;
 }
 
-.meter__value {
+.meter__value{
   font-size: 2.1rem;
   font-weight: 850;
 }
 
-.progress {
+.progress{
   background: var(--panel);
   margin-bottom: .9rem;
 }
 
-.progress__bar {
+.progress__bar{
   height: 10px;
   border-radius: 999px;
   background: rgba(17,19,24,.10);
@@ -883,7 +586,7 @@ h1::after{
   margin-top: .55rem;
 }
 
-.progress__fill {
+.progress__fill{
   height: 100%;
   border-radius: 999px;
   background: var(--accent);
@@ -891,24 +594,86 @@ h1::after{
   transition: width .2s ease;
 }
 
-.progress__text {
-  margin-top: .55rem;
+.progress__text{
+  margin-top:.55rem;
   color: var(--muted);
-  font-size: .95rem;
+  font-size:.95rem;
 }
 
-.unlocks {
+.unlocks{
   background: var(--panel2);
 }
 
-.unlocks__list {
+.unlocks__list{
   margin: .55rem 0 0 0;
   padding-left: 1.05rem;
 }
 
-.unlocks__list li {
+.unlocks__list li{
   margin: .28rem 0;
 }
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+  padding: 2rem 0 3rem;
+}
+
+.footer__inner{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.top{
+  text-decoration:none;
+  font-weight:700;
+}
+
+/* =========================
+   PRINT
+========================= */
+
+.page-break{ display:none; }
+
+@media print{
+  body{
+    background:#fff;
+  }
+
+  .site-header,
+  .hero__aside{
+    display:none;
+  }
+
+  .page-break{
+    display:block;
+    break-before: page;
+  }
+
+  .section{
+    break-inside: avoid;
+  }
+
+  #motivation,
+  #problem,
+  #solution,
+  #simulator,
+  #scale,
+  #ethics,
+  #references{
+    break-before: page;
+  }
+}
+
+@media print {
+  .page-break {
+    break-before: page;
+    page-break-before: always; /* fallback for older browsers */
+  }
+}
+
 
 
 
