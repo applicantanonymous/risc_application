@@ -629,4 +629,29 @@ h1::after{
 .top{
   text-decoration:none;
   font-weight:700;
+}
+/* ===== PROBLEM PAGE: remove the "two pages" white space ===== */
 
+/* If your section class is .section, this prevents "full-screen" panels */
+.section {
+  min-height: auto !important;
+  padding-top: 28px;
+  padding-bottom: 28px;
+}
+
+/* If your Problem section is #problem (or similar), kill hero spacing */
+#problem {
+  min-height: auto !important;
+  padding-bottom: 18px !important;
+  margin-bottom: 10px !important;
+}
+
+/* Reduce big gaps between stacked sections/cards */
+.section + .section {
+  margin-top: 14px !important;
+}
+
+/* Cards: keep nice look on screen, but don’t create extra vertical bulk */
+.card {
+  margin: 0;
+}
