@@ -77,23 +77,26 @@ window.addEventListener("DOMContentLoaded", () => {
 
     ACTIVITIES.forEach(a => {
       const row = document.createElement("label");
-      row.className = "item";
+      row.className = "activityRow";
 
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
+      checkbox.className = "activityRow__check";
       checkbox.dataset.points = String(a.points);
       checkbox.addEventListener("change", updateSimulator);
 
-      const meta = document.createElement("div");
-      meta.className = "item__meta";
-      meta.innerHTML = `
-        <div class="item__title">${a.title}</div>
-        <div class="item__desc">${a.desc}</div>
-        <div class="item__pts">${a.points} credits</div>
+      const body = document.createElement("div");
+      body.className = "activityRow__body";
+      body.innerHTML = `
+        <div class="activityRow__top">
+          <div class="activityRow__title">${a.title}</div>
+          <div class="activityRow__pts">${a.points} pts</div>
+        </div>
+        <div class="activityRow__desc">${a.desc}</div>
       `;
 
       row.appendChild(checkbox);
-      row.appendChild(meta);
+      row.appendChild(body);
       sim.activityList.appendChild(row);
     });
   }
@@ -196,5 +199,4 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
 });
-
 
