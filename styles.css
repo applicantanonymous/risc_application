@@ -828,27 +828,4 @@ h1::after{
     page-break-before: always; /* legacy */
     height: 0;
   }
-
-  /* Optional: avoid a blank first page if a break is accidentally first */
-  .page-break:first-child{
-    break-before: auto;
-    page-break-before: auto;
-  }
-
-  /* Keep cards from splitting */
-  .card, .callout{
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  /* No shadows in print */
-  *{
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-
-  /* Disable sticky for print */
-  .hero__aside{
-    position: static !important;
-  }
 }
