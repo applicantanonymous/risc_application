@@ -560,3 +560,25 @@ h1::after{
   background: transparent;
 }
 
+   /* Make text fill the full width inside boxed components */
+.card p,
+.callout p,
+.note p,
+.synthesis-box p,
+.item__desc {
+  max-width: none;         /* overrides .section p max-width */
+  text-align: justify;     /* stretches lines to both edges */
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* Optional: if some boxes use plain div text instead of <p> */
+.card,
+.callout,
+.note,
+.synthesis-box {
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+
