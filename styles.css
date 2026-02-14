@@ -635,132 +635,7 @@ h1::after{
    PRINT (no forced orientation, print everything)
 ========================= */
 
-@page{
-  margin: 0.35in;   /* smaller margins without being risky */
-}
-
 @media print{
-
-  /* Keep content visible and readable */
-  body{
-    background:#fff !important;
-    color:#000 !important;
-    font-size: 12px !important;
-    line-height: 1.45 !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  /* Hide only navigation chrome that is not "data" */
-  .site-header,
-  .top{
-    display:none !important;
-  }
-
-  /* Disable sticky so layout flows naturally */
-  .hero__aside{
-    position: static !important;
-    top: auto !important;
-  }
-
-  /* Tighten layout spacing */
-  .hero,
-  .section{
-    padding: 0.7rem 0 !important;
-  }
-
-  .container{
-    width: calc(100% - 0.2in) !important;
-    margin: 0 auto !important;
-  }
-
-  /* Type scaling for print */
-  .kicker{
-    font-size: .75rem !important;
-    letter-spacing: .04em !important;
-    margin-bottom: .2rem !important;
-  }
-
-  h1{
-    font-size: 24px !important;
-    line-height: 1.12 !important;
-    margin: 0 0 .45rem !important;
-  }
-
-  h1::after{
-    margin-top: .35rem !important;
-    height: 3px !important;
-  }
-
-  .section h2{
-    font-size: 17px !important;
-    margin: 0 0 .45rem !important;
-  }
-
-  .section h2::after{
-    margin-top: .3rem !important;
-    height: 2px !important;
-  }
-
-  .section__lede{
-    margin: 0 0 .7rem !important;
-  }
-
-  p{
-    margin: .42rem 0 !important;
-  }
-
-  /* Cards and callouts compact, but still present */
-  .card{
-    box-shadow: none !important;
-    padding: .85rem !important;
-  }
-
-  .callout{
-    padding: .75rem .85rem !important;
-    margin-top: .75rem !important;
-    box-shadow: none !important;
-  }
-
-  /* Reduce grid gaps so content fits */
-  .grid-2,
-  .grid-3,
-  .scale-estimate,
-  .hero__layout{
-    gap: .65rem !important;
-  }
-
-  /* Make the hero two columns print-friendly without hiding anything */
-  .hero__layout{
-    grid-template-columns: 1fr 1fr !important;
-    align-items: start !important;
-  }
-
-  /* Simulator compaction */
-  #simulator .sim__header{
-    margin-bottom: .55rem !important;
-  }
-
-  #simulator .checklist{
-    gap: .35rem !important;
-  }
-
-  #simulator .activityRow{
-    padding: .55rem .65rem !important;
-  }
-
-  #simulator .meter,
-  #simulator .progress,
-  #simulator .unlocks{
-    padding: .65rem .75rem !important;
-  }
-
-  /* Inputs smaller */
-  input{
-    padding: .45rem .55rem !important;
-  }
-
-  /* Page breaks */
   .page-break{ display:none !important; }
 
   #motivation,
@@ -771,13 +646,6 @@ h1::after{
   #ethics,
   #references{
     break-before: page;
-    page-break-before: always;
-  }
-
-  /* Allow content to flow fully if a section is longer than one page */
-  .section,
-  .card{
-    break-inside: auto;
-    page-break-inside: auto;
+    page-break-before: always; /* fallback */
   }
 }
