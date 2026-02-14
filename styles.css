@@ -534,27 +534,29 @@ h1::after{
   transition: all .15s ease;
 }
 
-/* Primary button */
-.btn--primary{
-  background: var(--accent);
-  color: #fff;
-  box-shadow: 0 6px 18px rgba(47,92,255,.25);
-}
+/* =========================
+   BUTTONS (clean + subtle)
+========================= */
 
-.btn--primary:hover{
-  background: #1d3fe0;
-  transform: translateY(-1px);
-}
-
-/* Secondary button */
-.btn--secondary{
-  background: rgba(17,19,24,.06);
+.btn{
+  appearance: none;
+  background: rgba(47,92,255,.08);
+  border: 1px solid rgba(47,92,255,.22);
   color: var(--text);
-  border: 1px solid rgba(17,19,24,.12);
+  border-radius: 12px;
+  padding: .45rem .8rem;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s ease;
 }
 
-.btn--secondary:hover{
-  background: rgba(17,19,24,.10);
+.btn:hover{
+  background: rgba(47,92,255,.12);
+  border-color: rgba(47,92,255,.30);
 }
 
+.btn--ghost{
+  background: transparent;
+}
 
