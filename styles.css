@@ -895,9 +895,13 @@ h1{
    - this overrides cleanly and ensures light blue background prints
    ========================= */
 
+/* =========================
+   PRINT: ONE SECTION PER PAGE
+========================= */
+
 @media print {
 
-  /* ensure colors actually print */
+  /* print background colors */
   *{
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
@@ -907,39 +911,124 @@ h1{
     background: #f6f7fb !important;
   }
 
-  /* keep sections/panels clean */
-  .site-header{ border-bottom: 1px solid rgba(0,0,0,.08); }
+  /* remove sticky behavior in print */
+  .hero__aside{
+    position: static !important;
+    top: auto !important;
+  }
+
+  /* Avoid awkward cuts inside important blocks */
+  .card,
+  .callout,
+  .stat,
+  .mini-quote,
+  .checklist,
+  .progress,
+  .unlocks{
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Each major section begins on a new page */
+  .section{
+    break-before: page;
+    page-break-before: always;
+  }
+
+  /* Don't force a new page BEFORE the first content */
+  .hero{
+    break-before: auto !important;
+    page-break-before: auto !important;
+  }
+
+  /* If you keep manual .page-break divs, neutralize them to prevent blank pages */
+  .page-break{
+    display: none !important;
+  }
+
+  /* Keep hero and first stats together on page 1 */
+  .hero{
+    break-after: page;          /* hero becomes page 1 */
+    page-break-after: always;
+  }
+
+  /* ensure the stats don't split */
+  .hero__cards{
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Slightly tighten hero so it reliably fits on 1 page */
+  .hero{
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
+  }
+  h1{
+    font-size: 28px !important;  /* keeps hero compact in print */
+    line-height: 1.15 !important;
+  }
+  .kicker{
+    font-size: 11px !important;
+    margin-bottom: 6px !important;
+  }
+  .callout{
+    margin-top: 12px !important;
+    padding: 12px 14px !important;
+  }
+  .stat__value{
+    font-size: 28px !important;
+  }
+  .stat{
+    padding: 14px 14px !important;
+  }
+
+  /* Make sections look clean on print */
   .card{
     box-shadow: none !important;
     border: 1px solid rgba(0,0,0,0.10) !important;
   }
 
-  /* invisible page breaks */
-  .page-break{
-    break-before: page;
-    page-break-before: always;
-  }
-
-  /* prevent blank first page */
-  .page-break:first-child{
-    break-before: auto !important;
-    page-break-before: auto !important;
-  }
-
-  /* your full-page motivation print */
-  #motivation{
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    page-break-after: always;
-  }
-
-  .motivation-text{
-    font-size: 32px;
+  /* OPTIONAL: keep nav/header from taking space */
+  .site-header{
+    display: none !important;
   }
 }
 
+/* =========================
+   WEBSITE FONTS (Inter + IBM Plex Serif)
+========================= */
 
+:root{
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  --font-serif: "IBM Plex Serif", ui-serif, Georgia, "Times New Roman", Times, serif;
 
+  /* slightly more premium default size */
+  --font-base: 16px;
+}
+
+body{
+  font-family: var(--font-sans);
+  font-size: var(--font-base);
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* headings feel “editorial” */
+h1, .section h2, h2, h3{
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
+}
+
+/* keep long lines readable */
+.section p,
+.section__lede{
+  max-width: 72ch;
+}
+
+/* your lede was too wide */
+.lede{
+  max-width: 72ch;
+  line-height: 1.8;
+}
