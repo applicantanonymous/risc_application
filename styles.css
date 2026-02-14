@@ -582,3 +582,35 @@ h1::after{
 }
 
 
+/* Simulator buttons (force consistent styling) */
+.sim__buttons .btn,
+#loadExample,
+#resetAll{
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(47,92,255,.08);
+  border: 1px solid rgba(47,92,255,.22);
+  color: var(--text);
+  border-radius: 12px;
+  padding: .45rem .8rem;
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .15s ease;
+}
+
+.sim__buttons .btn:hover,
+#loadExample:hover,
+#resetAll:hover{
+  background: rgba(47,92,255,.12);
+  border-color: rgba(47,92,255,.30);
+  transform: translateY(-1px);
+}
+
+#resetAll.btn--ghost{
+  background: transparent;
+}
+
+
+
