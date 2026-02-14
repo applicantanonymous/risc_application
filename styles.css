@@ -705,3 +705,38 @@ h1::after{
   }
 }
 
+/* PRINT: light-blue page like the site */
+@media print {
+  /* Force browsers (esp. Chrome) to actually print backgrounds */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Tighten margins + make the PAPER light blue */
+  @page {
+    margin: 0.5in 0.4in; /* top/bottom | left/right */
+  }
+
+  html, body {
+    background: #f6f7fb !important;  /* your site light blue */
+    margin: 0 !important;
+  }
+
+  /* Make content go full width (not constrained by --max) */
+  .container {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 0.15in !important;
+    padding-right: 0.15in !important;
+  }
+
+  /* Keep cards white for contrast (optional but usually nicest) */
+  .card {
+    background: #ffffff !important;
+    box-shadow: none !important;
+    border: 1px solid rgba(17,19,24,.12) !important;
+  }
+}
+
+
