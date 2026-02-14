@@ -819,50 +819,115 @@ h1::after{
   text-indent: -1.4rem;
 }
 
-/* PRINT-ONLY PAGE BREAKS */
-@media print {
-  .page-break {
-    break-before: page;
-    page-break-before: always;
-  }
+/* =========================
+   TYPOGRAPHY UPGRADE (minimal overrides)
+   ========================= */
 
-  /* ✅ prevent a blank first page */
-  .page-break:first-child,
-  body > .page-break:first-of-type,
-  main > .page-break:first-of-type,
-  .section.page-break:first-of-type {
-    break-before: auto !important;
-    page-break-before: auto !important;
-  }
+/* add font tokens without changing your palette */
+:root{
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  --font-serif: "IBM Plex Serif", ui-serif, Georgia, "Times New Roman", Times, serif;
+  --font-base: 16px; /* was 14.5px — this alone improves “seriousness” */
+}
+
+/* body font + slightly tighter global rhythm */
+body{
+  font-family: var(--font-sans);
+  line-height: 1.7;   /* keep readable but less floaty than 1.85 */
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* headings: instantly more “designed” */
+h1, .section h2{
+  font-family: var(--font-serif);
+  letter-spacing: -0.02em;
+}
+
+h1{
+  max-width: 52ch; /* tighter than 60ch = more editorial */
+}
+
+/* keep body text from spanning too wide everywhere */
+.section p,
+.section__lede,
+.refs{
+  max-width: 72ch;
+}
+
+/* lede was too wide: 95ch reads like a report dump */
+.lede{
+  max-width: 72ch;
+  font-size: 1.06rem;
+  line-height: 1.8;
+}
+
+/* nav/header: small but makes it look “real” */
+.site-header{
+  border-bottom: 1px solid rgba(17,19,24,.08);
+}
+
+.brand__title{
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+
+.nav a{
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+
+/* cards: slightly more padding reads more premium */
+.card{
+  padding: 1.35rem 1.35rem; /* was 1.15 */
+}
+
+/* stat numbers: calmer and less “poster-y” */
+.stat__value{
+  font-size: 2.35rem; /* was 2.55 */
+}
+
+
+/* =========================
+   PRINT FIXES (required)
+   - you currently have nested @media print blocks and missing braces
+   - this overrides cleanly and ensures light blue background prints
+   ========================= */
+
 @media print {
 
-  body {
-    background: #f6f7fb !important;   /* your light blue */
+  /* ensure colors actually print */
+  *{
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  .section {
-    background: #ffffff; /* keep panels white if you want contrast */
+  body{
+    background: #f6f7fb !important;
   }
 
-  .card {
-    box-shadow: none; /* optional: cleaner print */
-    border: 1px solid rgba(0,0,0,0.08);
+  /* keep sections/panels clean */
+  .site-header{ border-bottom: 1px solid rgba(0,0,0,.08); }
+  .card{
+    box-shadow: none !important;
+    border: 1px solid rgba(0,0,0,0.10) !important;
   }
-}
 
+  /* invisible page breaks */
+  .page-break{
+    break-before: page;
+    page-break-before: always;
+  }
 
+  /* prevent blank first page */
+  .page-break:first-child{
+    break-before: auto !important;
+    page-break-before: auto !important;
+  }
 
-
-
-/* =========================
-   PRINT STYLES
-========================= */
-
-@media print {
-
-  #motivation {
+  /* your full-page motivation print */
+  #motivation{
     height: 100vh;
     display: flex;
     align-items: center;
@@ -871,9 +936,10 @@ h1::after{
     page-break-after: always;
   }
 
-  .motivation-text {
+  .motivation-text{
     font-size: 32px;
   }
-
 }
+
+
 
