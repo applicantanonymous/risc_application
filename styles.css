@@ -494,3 +494,27 @@ h1::after{
   display:block;
   width: 44px;
 
+
+@media print {
+
+  #problem,
+  #scale,
+  #solution,
+  #simulator,
+  #references {
+    break-before: page;
+    page-break-before: always;
+  }
+
+}
+
+@media print {
+
+  .section {
+    break-inside: never;
+    page-break-inside: never;
+  }
+
+}
+
+
