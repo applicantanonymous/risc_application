@@ -894,105 +894,58 @@ h1{
    - you currently have nested @media print blocks and missing braces
    - this overrides cleanly and ensures light blue background prints
    ========================= */
-
 /* =========================
-   PRINT: ONE SECTION PER PAGE
+   PRINT STYLES
 ========================= */
 
 @media print {
 
-  /* print background colors */
-  *{
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+  /* Ensure background colors print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  body{
-    background: #f6f7fb !important;
+  body {
+    background: #f6f7fb !important; /* light blue */
+    color: #111318;
+    margin: 0;
   }
 
-  /* remove sticky behavior in print */
-  .hero__aside{
-    position: static !important;
-    top: auto !important;
+  /* Clean layout width for print */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
   }
 
-  /* Avoid awkward cuts inside important blocks */
-  .card,
-  .callout,
-  .stat,
-  .mini-quote,
-  .checklist,
-  .progress,
-  .unlocks{
-    break-inside: avoid;
+  /* Avoid awkward splits */
+  .section {
     page-break-inside: avoid;
+    break-inside: avoid;
+    padding: 40px 0;
   }
 
-  /* Each major section begins on a new page */
-  .section{
-    break-before: page;
+  /* Force major sections onto new pages */
+  #problem,
+  #solution,
+  #scale,
+  #references {
     page-break-before: always;
   }
 
-  /* Don't force a new page BEFORE the first content */
-  .hero{
-    break-before: auto !important;
-    page-break-before: auto !important;
+  /* Clean reference layout */
+  .refs {
+    column-count: 1;
   }
 
-  /* If you keep manual .page-break divs, neutralize them to prevent blank pages */
-  .page-break{
-    display: none !important;
+  /* Remove link styling in print */
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 
-  /* Keep hero and first stats together on page 1 */
-  .hero{
-    break-after: page;          /* hero becomes page 1 */
-    page-break-after: always;
-  }
-
-  /* ensure the stats don't split */
-  .hero__cards{
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  /* Slightly tighten hero so it reliably fits on 1 page */
-  .hero{
-    padding-top: 18px !important;
-    padding-bottom: 18px !important;
-  }
-  h1{
-    font-size: 28px !important;  /* keeps hero compact in print */
-    line-height: 1.15 !important;
-  }
-  .kicker{
-    font-size: 11px !important;
-    margin-bottom: 6px !important;
-  }
-  .callout{
-    margin-top: 12px !important;
-    padding: 12px 14px !important;
-  }
-  .stat__value{
-    font-size: 28px !important;
-  }
-  .stat{
-    padding: 14px 14px !important;
-  }
-
-  /* Make sections look clean on print */
-  .card{
-    box-shadow: none !important;
-    border: 1px solid rgba(0,0,0,0.10) !important;
-  }
-
-  /* OPTIONAL: keep nav/header from taking space */
-  .site-header{
-    display: none !important;
-  }
 }
+
 
 /* =========================
    WEBSITE FONTS (Inter + IBM Plex Serif)
