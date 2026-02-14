@@ -811,3 +811,44 @@ h1::after{
     color: #6a7687;
   }
 }
+
+/* Never show page-break spacers on screen */
+.page-break{
+  display: none;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+@media print{
+  /* Force a new page wherever you placed .page-break */
+  .page-break{
+    display: block !important;
+    break-before: page;
+    page-break-before: always; /* legacy */
+    height: 0;
+  }
+
+  /* Optional: avoid a blank first page if a break is accidentally first */
+  .page-break:first-child{
+    break-before: auto;
+    page-break-before: auto;
+  }
+
+  /* Keep cards from splitting */
+  .card, .callout{
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* No shadows in print */
+  *{
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Disable sticky for print */
+  .hero__aside{
+    position: static !important;
+  }
+}
